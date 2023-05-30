@@ -19,9 +19,25 @@ class MainViewController: UIViewController,ViewControllerFromStoryBoard {
     
     @IBOutlet weak var tableView: UITableView!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        DEBUG_LOG("FirstVC WillAppear")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        DEBUG_LOG("FirstVC WillDisappear")
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        DEBUG_LOG("FirstVC DidDisappear")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        DEBUG_LOG("FirstVC DidLoad")
         configureUI()
         // Do any additional setup after loading the view.
     }
@@ -81,11 +97,26 @@ extension MainViewController:UITableViewDataSource {
         switch subjects[indexPath.row] {
             
         case .imageCaching:
-            dest = UIViewController()
+            dest = ImageCachingViewController.viewController()
         }
         
+       
         
         self.navigationController?.pushViewController(dest!, animated: true)
+        /*
+         FirstVC DidLoad
+         FirstVC WillAppear
+         SecondVC DidLoad
+         FirstVC WillDisappear
+         SecondVC WillAppear
+         FirstVC DidDisappear
+
+         dismiss
+         SecondVC WillDisappear
+         FirstVC WillAppear
+         SecondVC DidDisappear
+         
+        */
     }
     
     
