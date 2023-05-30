@@ -25,20 +25,21 @@ extension UIViewController{
             
             if #available(iOS 15.0, *){ //iOS 15 이상
                 
-                
-                if let rootViewController = UIApplication.shared.connectedScenes
-                    .filter({$0.activationState == . foregroundActive})
-                    .map({$0 as? UIWindowScene})
-                    .compactMap({$0}).first?.windows.first?.rootViewController {
+              
+                if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                   let rootViewController = scene.windows.first?.rootViewController {
                     if rootViewController is UINavigationController {
                         root = (rootViewController as! UINavigationController).visibleViewController!
 
-                    }else{
+                    }
+                    else{
                         if let presentedViewController = rootViewController.presentedViewController {
                             root  = presentedViewController
                         }
                     }
                 }
+                
+
                 
                     
                     
