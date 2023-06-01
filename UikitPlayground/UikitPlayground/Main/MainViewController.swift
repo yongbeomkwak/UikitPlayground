@@ -9,12 +9,13 @@ import UIKit
 
 public enum Subject:String {
     case imageCaching
+    case escapingClosure
 }
 
 
 class MainViewController: UIViewController,ViewControllerFromStoryBoard {
     
-    let subjects:[Subject] = [.imageCaching]
+    let subjects:[Subject] = [.imageCaching,.escapingClosure]
     
     
     @IBOutlet weak var tableView: UITableView!

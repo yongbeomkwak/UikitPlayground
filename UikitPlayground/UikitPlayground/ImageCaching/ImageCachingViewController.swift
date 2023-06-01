@@ -120,7 +120,6 @@ class ImageCachingViewController : UIViewController,ViewControllerFromStoryBoard
  
 extension ImageCachingViewController{
     private func configureUI(){
-        DEBUG_LOG("HEllo")
         self.imageView.setImageUrl(.t1)
     }
 }
@@ -138,8 +137,22 @@ enum TestUrl:String {
 extension UIImageView{
     func setImageUrl(_ url: TestUrl){
         DispatchQueue.global(qos: .background).async {
+            
+             let cachedKey = NSString(string: url.rawValue)
+
+              /// cache된 이미지가 존재하면 그 이미지를 사용 (API 호출안하는 형태)
+              if let cachedImage = ImageCacheManager.shared.object(forKey: cachedKey) {
+                  DEBUG_LOG("Load from Cache")
+                  DispatchQueue.main.async {
+                      self.image = cachedImage
+                  }
+                  
+                  return
+              }
+            
+            
             guard let url = URL(string: url.rawValue) else {return}
-            URLSession.shared.dataTask(with: url) {[weak self] (data, result, error) in
+            let task = URLSession.shared.dataTask(with: url) {[weak self] (data, result, error) in
                 
                 guard let self else {return}
                 
@@ -154,12 +167,16 @@ extension UIImageView{
                 
                 DispatchQueue.main.async {
                     if let data = data, let image = UIImage(data: data) {
+                        DEBUG_LOG("Load from Server")
+                        ImageCacheManager.shared.setObject(image, forKey: cachedKey)
                         self.image = image
                     }
                 }
  
             }
-            .resume()
+            
+            
+            task.resume()
         }
         
     }
