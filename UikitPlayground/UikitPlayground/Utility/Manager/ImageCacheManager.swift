@@ -101,8 +101,75 @@ class ImageCacheManager {
     static let shared =  ImageCacheManager()
     
     private let cache = NSCache<NSString,NSData>()
+    private let fileManager = FileManager.default
     
-   // func loadImage()
+    func loadImage(url:String, completion: @escaping (Data) -> Void) {
+        
+        guard let url = URL(string: url) else {return}
+        
+        guard let cacheDirectory = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first else {return}
+        
+        var filePath = cacheDirectory.appending(path: url.lastPathComponent)
+        
+        
+        //Memory cache check
+        
+        let cachedKey = NSString(string: filePath.path())
+        
+        if let cachedData = cache.object(forKey: cachedKey) {
+            DEBUG_LOG("Memory cache Exist")
+            let imageData = Data(referencing: cachedData)
+            completion(imageData)
+            return
+            
+        }
+        
+        //Disk cache check
+        
+        if fileManager.fileExists(atPath: filePath.path()){
+            DEBUG_LOG("Disk Cache Exist")
+            
+            if let data = NSData(contentsOf: filePath){
+                cache.setObject(data, forKey: NSString(string: cachedKey)) // 메모리 캐시 업데이트
+                completion(Data(referencing: data))
+                return
+            }
+            
+        }
+        
+        //모든 캐시에 없음
+        
+        DEBUG_LOG("Fetch From Server")
+        
+        let task = URLSession.shared.dataTask(with: url) {[weak self] (data, result, error) in
+        
+            guard let self else {return}
+            
+            guard  error == nil else {
+                DEBUG_LOG("ERROR Occured")
+               completion(Data())
+                return
+            }
+            
+            guard let content = try? Data(contentsOf: url), let cacheData = NSData(contentsOf: url) else {
+                DEBUG_LOG("SomeThing Wrong")
+                return
+                
+            }
+            
+            
+            self.cache.setObject(cacheData, forKey: NSString(string: cachedKey)) // 메모리 캐시 등록
+            self.fileManager.createFile(atPath: filePath.path(), contents: content,attributes: nil) // 디스크 캐시 등록
+            completion(content)
+        }
+     
+        
+        
+        DispatchQueue.global(qos: .background).async {
+            task.resume()
+        }
+        
+    }
     
     
     

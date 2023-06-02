@@ -49,7 +49,15 @@ class ImageCachingViewController : UIViewController,ViewControllerFromStoryBoard
  
 extension ImageCachingViewController{
     private func configureUI(){
-        //self.imageView.setImageUrl(.t1)
+        ImageCacheManager.shared.loadImage(url: TestUrl.t1.rawValue) {[weak self] data in
+            
+            guard let self else {return}
+            DispatchQueue.main.async {
+                self.imageView.image = UIImage(data: data)
+            }
+            
+            
+        }
     }
 }
 
@@ -63,52 +71,3 @@ enum TestUrl:String {
     
 }
 
-extension UIImageView{
-    /*
-    func setImageUrl(_ url: TestUrl) {
-        DispatchQueue.global(qos: .background).async {
-            
-             let cachedKey = NSString(string: url.rawValue)
-
-              /// cache된 이미지가 존재하면 그 이미지를 사용 (API 호출안하는 형태)
-              if let cachedImage = ImageCacheManager.shared.object(forKey: cachedKey) {
-                  DEBUG_LOG("Load from Cache")
-                  DispatchQueue.main.async {
-                      self.image = cachedImage
-                  }
-                  
-                  return
-              }
-            
-            
-            guard let url = URL(string: url.rawValue) else {return}
-            let task = URLSession.shared.dataTask(with: url) {[weak self] (data, result, error) in
-                
-                guard let self else {return}
-                
-                guard  error == nil else {
-                    
-                    DispatchQueue.main.async {
-                        self.image = UIImage()
-                    }
-                     return
-                }
-                
-                
-                DispatchQueue.main.async {
-                    if let data = data, let image = UIImage(data: data) {
-                        DEBUG_LOG("Load from Server")
-                        ImageCacheManager.shared.setObject(image, forKey: cachedKey)
-                        self.image = image
-                    }
-                }
- 
-            }
-            
-            
-            task.resume()
-        }
-        
-    }
-     */
-}
