@@ -99,6 +99,9 @@ extension MainViewController:UITableViewDataSource {
             
         case .imageCaching:
             dest = ImageCachingViewController.viewController()
+        
+        case .escapingClosure:
+            dest = EscapingViewController.viewController()
         }
         
        
