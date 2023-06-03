@@ -100,23 +100,20 @@ class ImageCacheManager {
     
     static let shared =  ImageCacheManager()
     
-    private let cache = NSCache<NSString,NSData>() // 메모리 캐시
-    private let fileManager = FileManager.default // 디스크 캐시
+    private let memoeryCacheManager = MemoryCacheManager.shared // 메모리 캐시
+    private let diskCacheManager = DiskCacheManager.shared // 디스크 캐시
     
     func loadImage(url:String, completion: @escaping (Data) -> Void) {
         
         guard let url = URL(string: url) else {return}
         
-        guard let cacheDirectory = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first else {return}
-        
-        let filePath = cacheDirectory.appending(path: url.lastPathComponent) // 캐시 디렉토리에 url을 이용하여 경로를 생성
-        
-        
+        let filePath = diskCacheManager.getFilePath(url: url.lastPathComponent)
+            
         //Memory cache check
         
         let cachedKey = NSString(string: filePath.path()) // 메모리 캐시의 key값을 경로를 사용
         
-        if let cachedData = cache.object(forKey: cachedKey) { // 메모리 캐시에서 가져옴
+        if let cachedData = memoeryCacheManager.fatchData(key: cachedKey) { // 메모리 캐시에서 가져옴
             DEBUG_LOG("Memory cache Exist")
             let imageData = Data(referencing: cachedData)
             completion(imageData)
@@ -126,11 +123,11 @@ class ImageCacheManager {
         
         //Disk cache check
         
-        if fileManager.fileExists(atPath: filePath.path()){
+        if  diskCacheManager.isExistData(url: filePath.path()){
             DEBUG_LOG("Disk Cache Exist")
-            
+
             if let data = NSData(contentsOf: filePath){ // 디스크 캐시에서 가져옴
-                cache.setObject(data, forKey: NSString(string: cachedKey)) // 메모리 캐시 업데이트
+                memoeryCacheManager.saveData(data: data, key: cachedKey) // 메모리 캐시 업데이트
                 completion(Data(referencing: data))
                 return
             }
@@ -158,8 +155,8 @@ class ImageCacheManager {
             }
             
             //서버에서 가져와 각 캐시에 등록
-            self.cache.setObject(cacheData, forKey: NSString(string: cachedKey)) // 메모리 캐시 등록
-            self.fileManager.createFile(atPath: filePath.path(), contents: content,attributes: nil) // 디스크 캐시 등록
+            self.memoeryCacheManager.saveData(data: cacheData, key: cachedKey) // 메모리 캐시 저장
+            self.diskCacheManager.saveData(url: filePath.path(), data: data) // 디스크 캐시 저장
             completion(content)
         }
      
