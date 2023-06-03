@@ -9,7 +9,6 @@ import Foundation
 
 class MemoryCacheManager {
     
-    static let shared = MemoryCacheManager()
     private let cache = NSCache<NSString,NSData>() // 메모리 캐시
     
     

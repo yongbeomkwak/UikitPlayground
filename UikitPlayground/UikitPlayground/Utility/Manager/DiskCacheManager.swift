@@ -9,7 +9,6 @@ import Foundation
 
 class DiskCacheManager {
 
-    static let shared = DiskCacheManager()
     private let cache = FileManager.default
     
     func isExistData(url:String) ->Bool { // 캐시 존재 여부

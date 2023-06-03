@@ -100,8 +100,8 @@ class ImageCacheManager {
     
     static let shared =  ImageCacheManager()
     
-    private let memoeryCacheManager = MemoryCacheManager.shared // 메모리 캐시
-    private let diskCacheManager = DiskCacheManager.shared // 디스크 캐시
+    private let memoeryCacheManager = MemoryCacheManager() // 메모리 캐시
+    private let diskCacheManager = DiskCacheManager() // 디스크 캐시
     
     func loadImage(url:String, completion: @escaping (Data) -> Void) {
         
