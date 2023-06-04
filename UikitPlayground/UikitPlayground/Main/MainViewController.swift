@@ -10,12 +10,13 @@ import UIKit
 public enum Subject:String {
     case imageCaching
     case escapingClosure
+    case appStore
 }
 
 
 class MainViewController: UIViewController,ViewControllerFromStoryBoard {
     
-    let subjects:[Subject] = [.imageCaching,.escapingClosure]
+    let subjects:[Subject] = [.imageCaching,.escapingClosure,.appStore]
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -102,6 +103,9 @@ extension MainViewController:UITableViewDataSource {
         
         case .escapingClosure:
             dest = EscapingViewController.viewController()
+            
+        case .appStore:
+            dest = AppStoreViewController.viewController()
         }
         
        
