@@ -13,6 +13,8 @@ class RecentSearchResultViewController: UIViewController,ViewControllerFromStory
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        DEBUG_LOG("Before VC Load")
+   //     PreferenceManager.shared.addRecentRecords(word: "Hello")
         configureUI()
         
     }
@@ -31,6 +33,14 @@ extension RecentSearchResultViewController{
     private func configureUI(){
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        let header = RecentRecordHeaderView()
+        header.completionHandler = {
+            PreferenceManager.recentRecords = nil
+        }
+        tableView.tableHeaderView = header
+        
+        
     }
     
 }
@@ -60,5 +70,9 @@ extension RecentSearchResultViewController:UITableViewDataSource {
 }
 
 extension RecentSearchResultViewController:UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+         cell.layoutMargins = .zero
+         cell.separatorInset = .zero
+         cell.preservesSuperviewLayoutMargins = false
+     }
 }

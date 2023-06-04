@@ -23,11 +23,13 @@ public extension ContainerViewType where Self: UIViewController {
 //        viewController.view.snp.makeConstraints {
 //            $0.edges.equalTo(contentView)
 //        }
-//        
-        viewController.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
-        viewController.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
-        viewController.view.topAnchor.constraint(equalTo: contentView.topAnchor)
-        viewController.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+//
+        //오토레이아웃 내가 직접 설정할거야 그러니깐 뷰가 자동으로 모시깽이 되는 조건은 false되라 
+        viewController.view.translatesAutoresizingMaskIntoConstraints = false  // 자동 재약조건 해제
+        viewController.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 0).isActive = true
+        viewController.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: 0).isActive = true
+        viewController.view.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 0).isActive = true
+        viewController.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: 0).isActive = true
     }
 
     func remove(asChildViewController viewController: UIViewController) {

@@ -62,3 +62,36 @@ public final class UserDefaultWrapper<T: Codable> {
         return subject.eraseToAnyPublisher()
     }
 }
+
+extension PreferenceManager{
+    func addRecentRecords(word: String) {
+            let maxSize: Int = 10
+            var currentRecentRecords = PreferenceManager.recentRecords ?? []
+            
+            if currentRecentRecords.contains(word) {
+                if let i = currentRecentRecords.firstIndex(where: { $0 == word }){
+                    currentRecentRecords.remove(at: i)
+                    currentRecentRecords.insert(word, at: 0)
+                }
+                
+            }else{
+                if currentRecentRecords.count == maxSize {
+                    currentRecentRecords.removeLast()
+                }
+                currentRecentRecords.insert(word, at: 0)
+            }
+            
+            PreferenceManager.recentRecords = currentRecentRecords
+    }
+    
+    func removeRecentRecords(word: String) {
+           var currentRecentRecords = PreferenceManager.recentRecords ?? []
+
+           if let i = currentRecentRecords.firstIndex(where: { $0 == word }){
+               currentRecentRecords.remove(at: i)
+           }
+           
+           PreferenceManager.recentRecords = currentRecentRecords
+           
+       }
+}

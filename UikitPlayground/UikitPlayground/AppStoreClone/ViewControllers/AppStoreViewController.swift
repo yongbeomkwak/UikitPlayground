@@ -16,6 +16,7 @@ class AppStoreViewController: UIViewController,ViewControllerFromStoryBoard,Cont
     private var viewModel:AppStoreViewModel!
     fileprivate lazy var input = AppStoreViewModel.Input()
     fileprivate lazy var output = viewModel.transform(from: input)
+    fileprivate lazy var beforeVc = RecentSearchResultViewController.viewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,13 +49,24 @@ extension AppStoreViewController{
     private func setSearchController() {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = "게임,앱,스토리 등"
-        searchController.obscuresBackgroundDuringPresentation = false // 검색 중에 Background를 어둡게 할건지 결정하는 Boolean값입니다. 
+        searchController.obscuresBackgroundDuringPresentation = false // 검색 중에 Background를 어둡게 할건지 결정하는 Boolean값입니다.
+        
+        searchController.searchResultsUpdater = self
+        
         self.navigationItem.searchController = searchController
     }
     
     private func configureUI(){
         self.activityIndicator.isHidden = true
         
+        self.add(asChildViewController: beforeVc)
+    
     }
     
+}
+
+extension AppStoreViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        
+    }
 }
