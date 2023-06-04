@@ -14,7 +14,10 @@ class RecentSearchResultViewController: UIViewController,ViewControllerFromStory
         super.viewDidLoad()
 
         DEBUG_LOG("Before VC Load")
-   //     PreferenceManager.shared.addRecentRecords(word: "Hello")
+        PreferenceManager.shared.addRecentRecords(word: "Hello")
+        PreferenceManager.shared.addRecentRecords(word: "Hello2")
+        PreferenceManager.shared.addRecentRecords(word: "Hello3")
+        
         configureUI()
         
     }
@@ -31,14 +34,18 @@ class RecentSearchResultViewController: UIViewController,ViewControllerFromStory
 extension RecentSearchResultViewController{
     
     private func configureUI(){
+        if #available(iOS 15.0, *) {
+            self.tableView.sectionHeaderTopPadding = 0
+//                    let tableViews = self.view.subviews.map { $0 as? UITableView }.compactMap { $0 }
+//                    tableViews.forEach {
+//                        $0.sectionHeaderTopPadding = 0
+//                    }
+        }
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        
-        let header = RecentRecordHeaderView()
-        header.completionHandler = {
-            PreferenceManager.recentRecords = nil
-        }
-        tableView.tableHeaderView = header
+        self.tableView.backgroundColor = .systemGray6
+       
+      //  tableView.tableHeaderView = header
         
         
     }
@@ -47,6 +54,42 @@ extension RecentSearchResultViewController{
 
 extension RecentSearchResultViewController:UITableViewDataSource {
     
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        
+        
+        if PreferenceManager.recentRecords?.isEmpty ?? true{
+           
+            let header = WarningView()
+            return header
+        }
+        else {
+            
+           let  header = RecentRecordHeaderView()
+            
+            header.completionHandler = {
+                PreferenceManager.recentRecords = nil
+                tableView.reloadData()
+            }
+            
+            return header
+        }
+        
+        
+    
+    }
+    
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        if PreferenceManager.recentRecords?.isEmpty ?? true{
+//            return 300
+//        }
+//        else {
+//            
+//            return 50
+//        }
+//    }
+ 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         PreferenceManager.recentRecords?.count ?? 0

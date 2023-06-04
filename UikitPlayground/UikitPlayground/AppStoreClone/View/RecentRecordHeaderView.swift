@@ -9,6 +9,8 @@ import UIKit
 
 class RecentRecordHeaderView: UIView {
 
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var removeAllButton: UIButton!
     
     @IBAction func removeAll(_ sender: Any) {
         completionHandler?()
@@ -27,7 +29,18 @@ class RecentRecordHeaderView: UIView {
     }
     
     private func setupView(){
-
+        
+        if let view = Bundle.main.loadNibNamed("RecentRecordHeaderView", owner: self,options: nil)!.first as? UIView{
+                view.frame = self.bounds
+                view.layoutIfNeeded() //드로우 사이클을 호출할 때 쓰임
+                self.addSubview(view)
+        }
+        
+        self.titleLabel.text = "최근 검색"
+        self.titleLabel.textColor = .black
+        self.titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
+        self.removeAllButton.setTitle("전체 삭제", for: .normal)
+        self.removeAllButton.tintColor = .lightGray
 
     }
 

@@ -20,7 +20,15 @@ class WarningView: UIView {
     }
     
     private func setupView(){
-
+        DEBUG_LOG("WAR")
+        
+        if let view = Bundle.main.loadNibNamed("WarningView", owner: self,options: nil)!.first as? UIView{
+                view.frame = self.bounds
+                //view.backgroundColor = .gray
+                view.layoutIfNeeded() //드로우 사이클을 호출할 때 쓰임
+                self.addSubview(view)
+        }
+        
 
     }
 

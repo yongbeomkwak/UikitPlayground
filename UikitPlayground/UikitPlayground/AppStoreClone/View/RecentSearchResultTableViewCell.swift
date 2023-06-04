@@ -8,18 +8,18 @@
 import UIKit
 
 
+
+
 class RecentSearchResultTableViewCell: UITableViewCell {
 
     @IBOutlet weak var magnifyingGlassImageVIew: UIImageView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var label: UILabel!
     
-    var model:String = ""
     
     @IBAction func removeAction(_ sender: Any) {
-        DEBUG_LOG(model)
-        PreferenceManager.shared.removeRecentRecords(word: model)
-        
+    
+        PreferenceManager.shared.removeRecentRecords(word: self.label.text!)
     }
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,8 +37,13 @@ class RecentSearchResultTableViewCell: UITableViewCell {
 extension RecentSearchResultTableViewCell {
     
     public func update(text:String){
-    
-        model = text
+
+        if let view = Bundle.main.loadNibNamed("WarningView", owner: self,options: nil)!.first as? UIView{
+                view.frame = self.bounds
+                view.layoutIfNeeded() //드로우 사이클을 호출할 때 쓰임
+                self.addSubview(view)
+        }
+        
         label.text = text
         
         
