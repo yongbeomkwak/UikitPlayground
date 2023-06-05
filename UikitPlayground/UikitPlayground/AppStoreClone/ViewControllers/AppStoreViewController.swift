@@ -54,7 +54,7 @@ extension AppStoreViewController{
         searchController.obscuresBackgroundDuringPresentation = false // 검색 중에 Background를 어둡게 할건지 결정하는 Boolean값입니다.
         
         searchController.searchResultsUpdater = self
-        
+        searchController.searchBar.delegate = self // 리턴 키 인식을 위한 델리게이트
         self.navigationItem.searchController = searchController
     }
     
@@ -82,5 +82,12 @@ extension AppStoreViewController: UISearchResultsUpdating {
             return isActive && isSearchBarHasText
         }
         beforeVc.filtredBy(text: text, isFiltering: isFiltering)
+    }
+}
+
+
+extension AppStoreViewController: UISearchBarDelegate{
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        PreferenceManager.shared.addRecentRecords(word: searchBar.text!)
     }
 }
