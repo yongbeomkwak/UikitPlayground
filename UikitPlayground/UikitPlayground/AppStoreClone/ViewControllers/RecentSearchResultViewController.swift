@@ -18,6 +18,8 @@ class RecentSearchResultViewController: BaseViewController,ViewControllerFromSto
         PreferenceManager.shared.addRecentRecords(word: "Hello")
         PreferenceManager.shared.addRecentRecords(word: "Hello2")
         PreferenceManager.shared.addRecentRecords(word: "Hello3")
+        PreferenceManager.shared.addRecentRecords(word: "Ad")
+        PreferenceManager.shared.addRecentRecords(word: "Blo3")
         
         configureUI()
         
@@ -67,8 +69,12 @@ extension RecentSearchResultViewController:UITableViewDataSource {
             else {
                 let  header = RecentRecordHeaderView()
                  
-                 header.completionHandler = {
+                 header.completionHandler = { [weak self] in
+                     
+                     guard let self else {return}
+                     
                      PreferenceManager.recentRecords = nil
+                     self.viewModel.filteredData.removeAll()
                      tableView.reloadData()
                  }
                  
@@ -165,6 +171,7 @@ extension RecentSearchResultViewController:UITableViewDelegate {
 extension RecentSearchResultViewController:RecentSearchResultTableViewCellDelegate{
     func remove(text: String) {
         PreferenceManager.shared.removeRecentRecords(word: text)
+        viewModel.remove(text: text)
         tableView.reloadData()
     }
 }

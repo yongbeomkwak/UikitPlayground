@@ -21,4 +21,11 @@ class RecentSearchResultViewModel {
         
         
     }
+    
+    func remove(text:String){
+        
+        if let i = filteredData.firstIndex(where: { $0 == text }){
+            filteredData.remove(at: i)
+        }
+    }
 }
