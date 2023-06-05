@@ -19,6 +19,13 @@ class AppStoreViewController: UIViewController,ViewControllerFromStoryBoard,Cont
     fileprivate lazy var beforeVc = RecentSearchResultViewController.viewController()
     let searchController = UISearchController(searchResultsController: nil)
     
+    var isFiltering: Bool {
+            let searchController = self.navigationItem.searchController
+            let isActive = searchController?.isActive ?? false
+            let isSearchBarHasText = searchController?.searchBar.text?.isEmpty == false
+            return isActive && isSearchBarHasText
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationItem()
@@ -68,5 +75,9 @@ extension AppStoreViewController{
 extension AppStoreViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         DEBUG_LOG("\(searchController.searchBar.text)")
+        
+        guard let text = searchController.searchBar.text else {return}
+        
+        beforeVc.filtredBy(text: text)
     }
 }

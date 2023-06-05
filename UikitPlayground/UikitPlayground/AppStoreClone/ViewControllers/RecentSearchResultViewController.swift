@@ -10,6 +10,7 @@ import UIKit
 class RecentSearchResultViewController: BaseViewController,ViewControllerFromStoryBoard {
     @IBOutlet weak var tableView: UITableView!
     
+    lazy var viewModel = RecentSearchResultViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,11 +39,13 @@ extension RecentSearchResultViewController{
         self.tableView.dataSource = self
         self.tableView.backgroundColor = .systemGray6
        
-      //  tableView.tableHeaderView = header
-        
         
     }
     
+    public func filtredBy(text:String){
+        viewModel.filteredBy(text: text)
+        tableView.reloadData()
+    }
 }
 
 extension RecentSearchResultViewController:UITableViewDataSource {
@@ -50,7 +53,28 @@ extension RecentSearchResultViewController:UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
+        guard let parent = self.parent as? AppStoreViewController else  {
+            return nil
+        }
         
+        if parent.isFiltering {
+            
+            if viewModel.filteredData.isEmpty {
+                let header = WarningView()
+                return header
+            }
+            
+            else {
+                let  header = RecentRecordHeaderView()
+                 
+                 header.completionHandler = {
+                     PreferenceManager.recentRecords = nil
+                     tableView.reloadData()
+                 }
+                 
+                 return header
+            }
+        }
         
         if PreferenceManager.recentRecords?.isEmpty ?? true{
            
@@ -76,18 +100,37 @@ extension RecentSearchResultViewController:UITableViewDataSource {
  
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        PreferenceManager.recentRecords?.count ?? 0
+        
+        guard let parent = self.parent as? AppStoreViewController else  {
+            return 0
+        }
+        
+      return  parent.isFiltering ? viewModel.filteredData.count :  PreferenceManager.recentRecords?.count ?? 0
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard let parent = self.parent as? AppStoreViewController else  {
+            return UITableViewCell()
+        }
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecentSearchResultTableViewCell", for: indexPath) as? RecentSearchResultTableViewCell else {
             return UITableViewCell()
         }
         
+        var data:[String]
+        guard let savedData = PreferenceManager.recentRecords else { return UITableViewCell()}
         
+        if parent.isFiltering {
+            data = viewModel.filteredData
+        }
+        else {
+            data = savedData
+        }
         
-        guard let data = PreferenceManager.recentRecords else { return UITableViewCell()}
+  
+       
         cell.update(text: data[indexPath.row])
         cell.delegate = self
         
@@ -100,7 +143,21 @@ extension RecentSearchResultViewController:UITableViewDataSource {
 
 extension RecentSearchResultViewController:UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let data = PreferenceManager.recentRecords else { return }
+        
+        guard let parent = self.parent as? AppStoreViewController else  {
+            return
+        }
+        var data:[String]
+        guard let savedData = PreferenceManager.recentRecords else { return }
+        
+        if parent.isFiltering {
+            data = viewModel.filteredData
+        }
+        else {
+            data = savedData
+        }
+        
+
         DEBUG_LOG(data[indexPath.row])
     }
 }
