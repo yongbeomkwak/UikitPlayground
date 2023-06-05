@@ -8,24 +8,23 @@
 import Foundation
 
 class RecentSearchResultViewModel {
+    var dataSource: [String] = []
     
-    var filteredData:[String] = []
-    
-    
-    func filteredBy(text:String){
+    func filteredBy(text:String, isFiltering: Bool){
         
-        guard let data = PreferenceManager.recentRecords else {return}
+        /// 필터링 중이면 , 필터링된 값을 상용하고 , 아니면 raw 값을 사용한다.
         
-        filteredData = data.filter({$0.localizedCaseInsensitiveContains(text)})
-        
-        
-        
+        let recentRecords: [String] = PreferenceManager.recentRecords ?? []
+        dataSource = isFiltering ?
+            recentRecords.filter({$0.localizedCaseInsensitiveContains(text)}) :
+            recentRecords
     }
     
     func remove(text:String){
-        
-        if let i = filteredData.firstIndex(where: { $0 == text }){
-            filteredData.remove(at: i)
+        if let i = dataSource.firstIndex(where: { $0 == text }){
+            /// 보여진는 값과 실제 DB 값 제거 
+            dataSource.remove(at: i)
+            PreferenceManager.shared.removeRecentRecords(word: text)
         }
     }
 }

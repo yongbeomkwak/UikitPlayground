@@ -15,11 +15,6 @@ class RecentSearchResultViewController: BaseViewController,ViewControllerFromSto
         super.viewDidLoad()
 
         DEBUG_LOG("Before VC Load")
-        PreferenceManager.shared.addRecentRecords(word: "Hello")
-        PreferenceManager.shared.addRecentRecords(word: "Hello2")
-        PreferenceManager.shared.addRecentRecords(word: "Hello3")
-        PreferenceManager.shared.addRecentRecords(word: "Ad")
-        PreferenceManager.shared.addRecentRecords(word: "Blo3")
         
         configureUI()
         
@@ -44,8 +39,8 @@ extension RecentSearchResultViewController{
         
     }
     
-    public func filtredBy(text:String){
-        viewModel.filteredBy(text: text)
+    public func filtredBy(text:String, isFiltering: Bool){
+        viewModel.filteredBy(text: text, isFiltering: isFiltering)
         tableView.reloadData()
     }
 }
@@ -55,51 +50,28 @@ extension RecentSearchResultViewController:UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        guard let parent = self.parent as? AppStoreViewController else  {
-            return nil
-        }
+        /// 데이터 소스가 비어잇을 경우 와 아닐경우를 나눠 헤더를 구분한다.
         
-        if parent.isFiltering {
-            
-            if viewModel.filteredData.isEmpty {
-                let header = WarningView()
-                return header
-            }
-            
-            else {
-                let  header = RecentRecordHeaderView()
-                 
-                 header.completionHandler = { [weak self] in
-                     
-                     guard let self else {return}
-                     
-                     PreferenceManager.recentRecords = nil
-                     self.viewModel.filteredData.removeAll()
-                     tableView.reloadData()
-                 }
-                 
-                 return header
-            }
-        }
-        
-        if PreferenceManager.recentRecords?.isEmpty ?? true{
-           
+        if viewModel.dataSource.isEmpty {
             let header = WarningView()
             return header
         }
+        
         else {
-            
-           let  header = RecentRecordHeaderView()
-            
-            header.completionHandler = {
-                PreferenceManager.recentRecords = nil
-                tableView.reloadData()
-            }
-            
-            return header
+            let  header = RecentRecordHeaderView()
+             
+             header.completionHandler = { [weak self] in
+                 
+                 guard let self else {return}
+                 
+                 PreferenceManager.recentRecords = nil
+                 self.viewModel.dataSource.removeAll()
+                 tableView.reloadData()
+             }
+             
+             return header
         }
-        
-        
+
     
     }
     
@@ -107,38 +79,20 @@ extension RecentSearchResultViewController:UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        guard let parent = self.parent as? AppStoreViewController else  {
-            return 0
-        }
-        
-      return  parent.isFiltering ? viewModel.filteredData.count :  PreferenceManager.recentRecords?.count ?? 0
-        
+        return viewModel.dataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let parent = self.parent as? AppStoreViewController else  {
-            return UITableViewCell()
-        }
+
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecentSearchResultTableViewCell", for: indexPath) as? RecentSearchResultTableViewCell else {
             return UITableViewCell()
         }
-        
-        var data:[String]
-        guard let savedData = PreferenceManager.recentRecords else { return UITableViewCell()}
-        
-        if parent.isFiltering {
-            data = viewModel.filteredData
-        }
-        else {
-            data = savedData
-        }
-        
-  
+    
        
-        cell.update(text: data[indexPath.row])
-        cell.delegate = self
+        cell.update(text: viewModel.dataSource[indexPath.row])
+        cell.delegate = self // 삭제 델리게이트
         
         
         return cell
@@ -153,24 +107,13 @@ extension RecentSearchResultViewController:UITableViewDelegate {
         guard let parent = self.parent as? AppStoreViewController else  {
             return
         }
-        var data:[String]
-        guard let savedData = PreferenceManager.recentRecords else { return }
-        
-        if parent.isFiltering {
-            data = viewModel.filteredData
-        }
-        else {
-            data = savedData
-        }
-        
 
-        DEBUG_LOG(data[indexPath.row])
+        parent.searchController.searchBar.text = viewModel.dataSource[indexPath.row] // 부모 뷰컨 검색창에 데이터 삽입 
     }
 }
 
 extension RecentSearchResultViewController:RecentSearchResultTableViewCellDelegate{
     func remove(text: String) {
-        PreferenceManager.shared.removeRecentRecords(word: text)
         viewModel.remove(text: text)
         tableView.reloadData()
     }
