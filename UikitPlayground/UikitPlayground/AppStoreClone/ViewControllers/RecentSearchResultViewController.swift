@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RecentSearchResultViewController: UIViewController,ViewControllerFromStoryBoard {
+class RecentSearchResultViewController: BaseViewController,ViewControllerFromStoryBoard {
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -34,13 +34,6 @@ class RecentSearchResultViewController: UIViewController,ViewControllerFromStory
 extension RecentSearchResultViewController{
     
     private func configureUI(){
-        if #available(iOS 15.0, *) {
-            self.tableView.sectionHeaderTopPadding = 0
-//                    let tableViews = self.view.subviews.map { $0 as? UITableView }.compactMap { $0 }
-//                    tableViews.forEach {
-//                        $0.sectionHeaderTopPadding = 0
-//                    }
-        }
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.backgroundColor = .systemGray6
@@ -106,7 +99,10 @@ extension RecentSearchResultViewController:UITableViewDataSource {
 }
 
 extension RecentSearchResultViewController:UITableViewDelegate {
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let data = PreferenceManager.recentRecords else { return }
+        DEBUG_LOG(data[indexPath.row])
+    }
 }
 
 extension RecentSearchResultViewController:RecentSearchResultTableViewCellDelegate{
