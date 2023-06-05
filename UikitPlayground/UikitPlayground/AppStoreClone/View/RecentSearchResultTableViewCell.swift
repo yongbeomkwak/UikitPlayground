@@ -8,6 +8,10 @@
 import UIKit
 
 
+public protocol RecentSearchResultTableViewCellDelegate {
+    
+    func remove(text:String)
+}
 
 
 class RecentSearchResultTableViewCell: UITableViewCell {
@@ -19,8 +23,11 @@ class RecentSearchResultTableViewCell: UITableViewCell {
     
     @IBAction func removeAction(_ sender: Any) {
     
-        PreferenceManager.shared.removeRecentRecords(word: self.label.text!)
+        delegate?.remove(text: self.label.text!)
+      
     }
+    
+    var delegate:RecentSearchResultTableViewCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -37,12 +44,6 @@ class RecentSearchResultTableViewCell: UITableViewCell {
 extension RecentSearchResultTableViewCell {
     
     public func update(text:String){
-
-        if let view = Bundle.main.loadNibNamed("WarningView", owner: self,options: nil)!.first as? UIView{
-                view.frame = self.bounds
-                view.layoutIfNeeded() //드로우 사이클을 호출할 때 쓰임
-                self.addSubview(view)
-        }
         
         label.text = text
         

@@ -80,15 +80,6 @@ extension RecentSearchResultViewController:UITableViewDataSource {
     
     }
     
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        if PreferenceManager.recentRecords?.isEmpty ?? true{
-//            return 300
-//        }
-//        else {
-//            
-//            return 50
-//        }
-//    }
  
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -102,20 +93,25 @@ extension RecentSearchResultViewController:UITableViewDataSource {
         }
         
         
+        
         guard let data = PreferenceManager.recentRecords else { return UITableViewCell()}
         cell.update(text: data[indexPath.row])
+        cell.delegate = self
         
         
         return cell
     }
-    
+
     
 }
 
 extension RecentSearchResultViewController:UITableViewDelegate {
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-         cell.layoutMargins = .zero
-         cell.separatorInset = .zero
-         cell.preservesSuperviewLayoutMargins = false
-     }
+
+}
+
+extension RecentSearchResultViewController:RecentSearchResultTableViewCellDelegate{
+    func remove(text: String) {
+        PreferenceManager.shared.removeRecentRecords(word: text)
+        tableView.reloadData()
+    }
 }

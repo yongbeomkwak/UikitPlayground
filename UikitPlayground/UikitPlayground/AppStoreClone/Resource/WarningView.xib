@@ -15,7 +15,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="최근 검색어가 없습니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pi6-Ko-BcQ">
-                    <rect key="frame" x="20" y="99" width="393" height="28.666666666666671"/>
+                    <rect key="frame" x="84.333333333333329" y="139" width="224.33333333333337" height="28.666666666666657"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                     <color key="textColor" systemColor="tintColor"/>
                     <nil key="highlightedColor"/>
@@ -24,9 +24,8 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="Pi6-Ko-BcQ" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" constant="20" id="StP-F4-tUF"/>
-                <constraint firstItem="Pi6-Ko-BcQ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="40" id="dT8-tD-wuz"/>
-                <constraint firstItem="Pi6-Ko-BcQ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="toc-Ao-vCa"/>
+                <constraint firstItem="Pi6-Ko-BcQ" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="T4l-Ft-OXN"/>
+                <constraint firstItem="Pi6-Ko-BcQ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="80" id="dT8-tD-wuz"/>
             </constraints>
             <point key="canvasLocation" x="140" y="20"/>
         </view>
