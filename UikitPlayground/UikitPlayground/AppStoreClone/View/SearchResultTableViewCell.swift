@@ -54,12 +54,32 @@ class SearchResultTableViewCell: UITableViewCell {
         stars[4] = fifthStarImageView
         
         initializeStar()
+
     }
     
     private func initializeStar() {
         for star in stars {
             star.tintColor = .systemGray4
             star.image = UIImage(systemName: "star")
+        }
+    }
+    
+    
+    public func update(model:SearchDetail){
+        
+        titleLabel.text = model.trackName
+        subTitle.text = "\(model.trackID)"
+        
+        
+        ImageCacheManager.shared.loadImage(url:model.artworkUrl60) { [weak self] data in
+            
+            guard let self else {return}
+            
+            DispatchQueue.main.async { // UI작업  메인 스레드
+                self.thumbNailImage.image = UIImage(data: data)
+            }
+           
+            
         }
     }
 

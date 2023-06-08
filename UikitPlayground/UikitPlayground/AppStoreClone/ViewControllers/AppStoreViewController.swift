@@ -73,6 +73,14 @@ extension AppStoreViewController{
 extension AppStoreViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         
+        if let child = self.children.first as? SearchResultViewController {
+            // 검색 후 다시 검색 시작 할 때
+            self.remove(asChildViewController: child) // 검색 후 뷰컨을 때고, 최근 검색어를 다시 불러옴
+            self.add(asChildViewController: beforeVc)
+        }
+        
+        
+        
         guard let text = searchController.searchBar.text else {return}
         
         var isFiltering: Bool {
@@ -90,8 +98,10 @@ extension AppStoreViewController: UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let text = searchBar.text!
         PreferenceManager.shared.addRecentRecords(word: text)
-        self.remove(asChildViewController: beforeVc)
+        self.remove(asChildViewController: beforeVc) // 최근검색어 뷰컨 제거
         
+        
+        //인디케이터 동작
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
         
@@ -102,6 +112,11 @@ extension AppStoreViewController: UISearchBarDelegate{
                 
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.isHidden = true
+                
+                //인디케이터 종료
+                
+                
+                //DI 및 검색 후 화면 뷰컨 추가
                 self.add(asChildViewController: SearchResultViewController.viewController(viewModel: SearchResultViewModel(dataSource: result)))
             }
         }

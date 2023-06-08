@@ -13,7 +13,7 @@ class NetworkManager {
     
     static let shared = NetworkManager()
     
-    private var searchApi = "https://itunes.apple.com/search"
+    private let searchApi = "https://itunes.apple.com/search"
     
     
     func loadSearchResult(term:String,completion: @escaping (SearchResultModel) -> Void)
@@ -21,13 +21,13 @@ class NetworkManager {
         guard var urlComponent = URLComponents(string: searchApi) else {return }
         
         var queryItemArray:[URLQueryItem] = []
-        
         queryItemArray.append( URLQueryItem(name: "term", value: term ))
         queryItemArray.append(URLQueryItem(name: "country", value: "kr"))
         queryItemArray.append(URLQueryItem(name: "entity", value: "software"))
         queryItemArray.append(URLQueryItem(name: "limit", value: "10"))
         
         urlComponent.queryItems = queryItemArray
+        //URL에 Query 추가
         
         
         
@@ -36,7 +36,6 @@ class NetworkManager {
         // request.httpMethod = "GET"
         
         guard let requestURL = urlComponent.url else { return }
-        
         
         
         
@@ -50,7 +49,7 @@ class NetworkManager {
             let decoder = JSONDecoder()
             guard let result = try? decoder.decode(SearchResultModel.self, from: data) else {return}
             
-            DEBUG_LOG("RESULT:\(result)")
+            //디코딩 후 , 컴플리션 호출
             
             completion(result)
         }

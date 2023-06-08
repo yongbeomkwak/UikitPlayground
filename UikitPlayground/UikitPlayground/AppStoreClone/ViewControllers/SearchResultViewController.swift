@@ -14,8 +14,7 @@ class SearchResultViewController: BaseViewController,ViewControllerFromStoryBoar
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
+        configureUI()
     }
     
 
@@ -35,6 +34,30 @@ class SearchResultViewController: BaseViewController,ViewControllerFromStoryBoar
 extension SearchResultViewController{
     
     private func configureUI(){
-        
+        tableView.dataSource = self
+        //tableView.delegate = self
     }
+}
+
+extension SearchResultViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.dataSource.resultCount
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchResultTableViewCell") as? SearchResultTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        let row = indexPath.row
+        
+        cell.update(model: viewModel.dataSource.results[row])
+    
+        
+        return cell
+    }
+    
+    
+    
 }

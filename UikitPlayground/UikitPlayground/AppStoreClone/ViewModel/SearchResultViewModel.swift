@@ -24,6 +24,7 @@ class SearchResultViewModel:ViewModelType{
         self.dataSource = dataSource
         
         DEBUG_LOG("RESULT: \(dataSource.resultCount)")
+        
     }
     
     public func transform(from input: Input) -> Output {
