@@ -14,6 +14,7 @@ public protocol ContainerViewType{
 
 public extension ContainerViewType where Self: UIViewController {
     
+    //구구 여기 한번만 다시 정의
     func add(asChildViewController viewController: UIViewController) {
 
         addChild(viewController) // 붙힘
