@@ -103,15 +103,65 @@ class SearchResultTableViewCell: UITableViewCell {
     }
     
     
+    private func getStarStatus(rate:Double) -> [Star] {
+        
+        let roundedValue = Int(round(rate*10)) // 소수 점 2째 자리에서 반올림
+        
+        let number = roundedValue / 10 // 정수
+        let decimal = roundedValue % 10 // 소수점
+        
+        DEBUG_LOG("N: \(number) D: \(decimal) ")
+        var result:[Star] = [.empty,.empty,.empty,.empty,.empty]
+        
+        
+        for i in 0..<number {  // 별 꽉 채우기
+            result[i] = .full
+        }
+       
+        if decimal > 6 {
+            for i in number..<5 {
+                result[i] = .full
+            }
+        }
+        
+        else if decimal == 5 { // 4가 넘으면 half
+            for i in number..<5 {
+                result[i] = .half
+            }
+        }
+        
+        
+        
+        
+        return result
+        
+    }
+    
+    
     public func update(model:SearchDetail){
         
         titleLabel.text = model.trackName
         subTitle.text = "\(model.trackID)"
         numberOfRatingLabel.text = convertRatingToKor(rate: model.userRatingCount)
         
+        var index:Int = 0
+        for s in getStarStatus(rate: model.averageUserRating) {
+            
+            switch s {
+                case .full:
+                    stars[index].image = UIImage(systemName: "star.fill")
+                
+                case .half:
+                stars[index].image = UIImage(systemName: "star.leadinghalf.filled")
+                
+                case.empty:
+                    continue
+            }
+            
+            index += 1
+        }
         
-        
-        
+
         ImageCacheManager.shared.loadImage(url:model.artworkUrl512) { [weak self] data in
             
             guard let self else {return}
@@ -123,6 +173,7 @@ class SearchResultTableViewCell: UITableViewCell {
             
         }
         
+        //구구  컬렉션 뷰를 TableView 안에서 가능??
     }
 
 
