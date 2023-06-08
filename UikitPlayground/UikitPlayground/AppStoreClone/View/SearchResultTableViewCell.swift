@@ -7,6 +7,14 @@
 
 import UIKit
 
+public enum Star {
+    
+    case full
+    case half
+    case empty
+    
+}
+
 class SearchResultTableViewCell: UITableViewCell {
 
     @IBOutlet weak var thumbNailImage: UIImageView!
@@ -20,7 +28,7 @@ class SearchResultTableViewCell: UITableViewCell {
     @IBOutlet weak var fourthStarImageView: UIImageView!
     @IBOutlet weak var fifthStarImageView: UIImageView!
     
-    @IBOutlet weak var numberOfReviewsLabel: UILabel!
+    @IBOutlet weak var numberOfRatingLabel: UILabel!
     
     @IBOutlet weak var installButton: UIButton!
     
@@ -34,18 +42,19 @@ class SearchResultTableViewCell: UITableViewCell {
         self.thumbNailImage.layer.cornerRadius = 12
         self.thumbNailImage.clipsToBounds = true
         
-        self.titleLabel.font = .systemFont(ofSize: 15, weight: .medium)
+        self.titleLabel.font = .systemFont(ofSize: 20, weight: .regular)
         self.titleLabel.textColor = .black
         
-        self.subTitle.font = .systemFont(ofSize: 10, weight: .light)
+        self.subTitle.font = .systemFont(ofSize: 15, weight: .light)
         self.subTitle.textColor = .black
         
-        self.numberOfReviewsLabel.font = .systemFont(ofSize: 8, weight: .light)
-        self.numberOfReviewsLabel.textColor = .gray
+        self.numberOfRatingLabel.font = .systemFont(ofSize: 10, weight: .light)
+        self.numberOfRatingLabel.textColor = .gray
         
         self.installButton.setTitle("받기", for: .normal)
         self.installButton.tintColor = .systemBlue
-        self.installButton.layer.cornerRadius = 24
+        self.installButton.layer.cornerRadius = 48
+        //구구 버튼 둥그렇게 ?? 왜 안될까..
         
         stars[0] = firstStarImageView
         stars[1] = secondStarImageView
@@ -64,14 +73,46 @@ class SearchResultTableViewCell: UITableViewCell {
         }
     }
     
+    private func convertRatingToKor(rate:Int) -> String {
+
+        
+        
+        
+        
+        let len:Int = String(rate).count
+        
+        
+        if len < 4 {
+            return String(rate)
+        }
+        
+
+        
+        switch len {
+
+            case 4:
+                return "\(round(Double(rate / 100))/10)천" // 반올림 후 , 다시 나눔
+        
+            default:
+                return "\(round(Double(rate / 1000))/10)만"
+
+        }
+
+
+
+    }
+    
     
     public func update(model:SearchDetail){
         
         titleLabel.text = model.trackName
         subTitle.text = "\(model.trackID)"
+        numberOfRatingLabel.text = convertRatingToKor(rate: model.userRatingCount)
         
         
-        ImageCacheManager.shared.loadImage(url:model.artworkUrl60) { [weak self] data in
+        
+        
+        ImageCacheManager.shared.loadImage(url:model.artworkUrl512) { [weak self] data in
             
             guard let self else {return}
             
@@ -81,6 +122,7 @@ class SearchResultTableViewCell: UITableViewCell {
            
             
         }
+        
     }
 
 
