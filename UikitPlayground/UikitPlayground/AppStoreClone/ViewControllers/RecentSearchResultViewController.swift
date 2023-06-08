@@ -10,6 +10,7 @@ import UIKit
 class RecentSearchResultViewController: BaseViewController,ViewControllerFromStoryBoard {
     @IBOutlet weak var tableView: UITableView!
     
+    
     lazy var viewModel = RecentSearchResultViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -131,10 +131,10 @@
             </objects>
             <point key="canvasLocation" x="1805" y="-2"/>
         </scene>
-        <!--View Controller-->
+        <!--Search Result View Controller-->
         <scene sceneID="12u-0e-zEi">
             <objects>
-                <viewController id="bsw-pJ-L4w" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchResultViewController" id="bsw-pJ-L4w" customClass="SearchResultViewController" customModule="UikitPlayground" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XcT-Ja-poP">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -143,7 +143,7 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="233" id="jqn-Yd-QJl">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchResultTableViewCell" rowHeight="233" id="jqn-Yd-QJl" customClass="SearchResultTableViewCell" customModule="UikitPlayground" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="233"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jqn-Yd-QJl" id="Eoe-a5-6mx">
@@ -218,22 +218,26 @@
                                                     </subviews>
                                                 </stackView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f8I-7E-2MU">
-                                                    <rect key="frame" x="349" y="40.666666666666664" width="24" height="14"/>
+                                                    <rect key="frame" x="318" y="35" width="55" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="55" id="WxA-px-tdv"/>
+                                                        <constraint firstAttribute="height" constant="25" id="mkT-Mr-PNh"/>
+                                                    </constraints>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain"/>
+                                                    <buttonConfiguration key="configuration" style="gray"/>
                                                 </button>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gUu-mE-Zqb">
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gUu-mE-Zqb">
                                                     <rect key="frame" x="20" y="95.666666666666671" width="373" height="137.33333333333331"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4cD-zS-ERt">
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4cD-zS-ERt">
                                                         <size key="itemSize" width="128" height="128"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="RU2-3b-U5G">
-                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ScreenShotCollectionViewCell" id="RU2-3b-U5G" customClass="ScreenShotCollectionViewCell" customModule="UikitPlayground" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="4.666666666666667" width="128" height="128"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="URg-rL-50Y">
                                                                 <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -252,6 +256,9 @@
                                                                     <constraint firstItem="0tS-97-49L" firstAttribute="top" secondItem="URg-rL-50Y" secondAttribute="top" id="xCl-vn-hn8"/>
                                                                 </constraints>
                                                             </collectionViewCellContentView>
+                                                            <connections>
+                                                                <outlet property="screenShotImageView" destination="0tS-97-49L" id="Wcc-9H-NB7"/>
+                                                            </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
@@ -269,6 +276,19 @@
                                                 <constraint firstItem="gUu-mE-Zqb" firstAttribute="leading" secondItem="cyg-i3-FmF" secondAttribute="leading" id="ul0-fV-5dN"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="collectionView" destination="gUu-mE-Zqb" id="yQ8-2D-vuH"/>
+                                            <outlet property="fifthStarImageView" destination="Vce-3U-dQO" id="Cct-nq-qZU"/>
+                                            <outlet property="firstStarImageView" destination="H7Q-FJ-gXG" id="tTi-2i-qs5"/>
+                                            <outlet property="fourthStarImageView" destination="VvR-vP-5SD" id="Hgc-r6-dev"/>
+                                            <outlet property="installButton" destination="f8I-7E-2MU" id="EAK-bJ-Os4"/>
+                                            <outlet property="numberOfReviewsLabel" destination="5PO-3f-Wei" id="wvy-XS-adq"/>
+                                            <outlet property="secondStarImageView" destination="2Gm-ca-WhW" id="3Bp-4O-ObC"/>
+                                            <outlet property="subTitle" destination="Esq-Am-4hM" id="4Ru-n8-Kqk"/>
+                                            <outlet property="thirdStarImageView" destination="3Sg-Fe-hec" id="8oS-p3-t0j"/>
+                                            <outlet property="thumbNailImage" destination="cyg-i3-FmF" id="b1j-vm-Kob"/>
+                                            <outlet property="titleLabel" destination="gXB-XV-hl1" id="EhE-pw-6ew"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -282,6 +302,9 @@
                             <constraint firstItem="muu-or-ijF" firstAttribute="trailing" secondItem="h9S-GE-Dct" secondAttribute="trailing" id="ujN-lT-lS8"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="h9S-GE-Dct" id="ZTl-fq-Cdv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hSC-5S-9EQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
