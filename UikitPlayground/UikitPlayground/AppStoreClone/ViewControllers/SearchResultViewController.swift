@@ -10,6 +10,8 @@ import UIKit
 class SearchResultViewController: BaseViewController,ViewControllerFromStoryBoard {
     @IBOutlet weak var tableView: UITableView!
     
+    var viewModel:SearchResultViewModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -17,9 +19,13 @@ class SearchResultViewController: BaseViewController,ViewControllerFromStoryBoar
     }
     
 
-    public static func viewController() -> SearchResultViewController {
+    public static func viewController(viewModel:SearchResultViewModel) -> SearchResultViewController {
         
         let vc = SearchResultViewController.viewController(storyBoardName: "Appstore", bundle: .main)
+        vc.viewModel = viewModel
+        
+        
+        
         return vc
     }
 

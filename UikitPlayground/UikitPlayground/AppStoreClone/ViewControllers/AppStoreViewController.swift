@@ -88,6 +88,23 @@ extension AppStoreViewController: UISearchResultsUpdating {
 
 extension AppStoreViewController: UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        PreferenceManager.shared.addRecentRecords(word: searchBar.text!)
+        let text = searchBar.text!
+        PreferenceManager.shared.addRecentRecords(word: text)
+        self.remove(asChildViewController: beforeVc)
+        
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        
+        NetworkManager.shared.loadSearchResult(term: text) {[weak self] result in
+            
+            DispatchQueue.main.async {
+                guard let self else {return}
+                
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
+                self.add(asChildViewController: SearchResultViewController.viewController(viewModel: SearchResultViewModel(dataSource: result)))
+            }
+        }
+        
     }
 }

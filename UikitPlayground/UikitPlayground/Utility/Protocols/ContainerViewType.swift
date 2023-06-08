@@ -16,9 +16,9 @@ public extension ContainerViewType where Self: UIViewController {
     
     func add(asChildViewController viewController: UIViewController) {
 
-        addChild(viewController)
-        contentView.addSubview(viewController.view)
-        viewController.didMove(toParent: self)
+        addChild(viewController) // 붙힘
+        contentView.addSubview(viewController.view) // 자식뷰 리스트에 등록
+        viewController.didMove(toParent: self) // 옮긴다고 시그널?
 
 //        viewController.view.snp.makeConstraints {
 //            $0.edges.equalTo(contentView)
@@ -34,8 +34,8 @@ public extension ContainerViewType where Self: UIViewController {
 
     func remove(asChildViewController viewController: UIViewController) {
 
-        viewController.willMove(toParent: nil)
-        viewController.view.removeFromSuperview()
-        viewController.removeFromParent()
+        viewController.willMove(toParent: nil) // 땐다고 시그널 보냄
+        viewController.view.removeFromSuperview() // 실질적으로 땜
+        viewController.removeFromParent() // 자식뷰 배열에서 뺌
     }
 }
