@@ -107,14 +107,11 @@ class ImageCacheManager {
         
         guard let url = URL(string: url) else {return}
         
-      //  DEBUG_LOG("LA : \(url.lastPathComponent)")
-      //   DEBUG_LOG("LA : \(url.absoluteString)")
-     
-
-        let cnt = url.pathComponents.count
-        let unique = url.pathComponents[cnt-2]
         
-        let filePath = diskCacheManager.getFilePath(url: unique)
+        //더 정확한 키값은 , 해쉬함수를 이용하는 것 
+
+        
+        let filePath = diskCacheManager.getFilePath(url: url.absoluteString)
             
         //Memory cache check
         

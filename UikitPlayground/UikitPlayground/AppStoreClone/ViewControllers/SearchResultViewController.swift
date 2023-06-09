@@ -8,10 +8,11 @@
 import UIKit
 
 class SearchResultViewController: BaseViewController,ViewControllerFromStoryBoard {
+    
+    //DiSelected 만들어주기
     @IBOutlet weak var tableView: UITableView!
     
     var viewModel:SearchResultViewModel!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -65,6 +66,10 @@ extension SearchResultViewController: UITableViewDataSource {
 extension SearchResultViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 400
+        
+        let width = (UIScreen.main.bounds.width - CGFloat(60))/CGFloat(3)
+        let height = width * 696 / 392
+        
+        return 120 + height
     }
 }

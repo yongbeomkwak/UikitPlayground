@@ -67,7 +67,7 @@ class SearchResultTableViewCell: UITableViewCell {
         initializeStar()
         
         collectionView.dataSource = self
-     
+        collectionView.delegate = self
 
     }
     
@@ -202,11 +202,11 @@ extension SearchResultTableViewCell:UICollectionViewDelegate,UICollectionViewDel
 //    }
 
 //    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 50.0
+//        return 50.0 //셀 사이간격
 //    }
-//
+
 //    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        return 50.0
+//        return 10.0
 //    }
 
 }
