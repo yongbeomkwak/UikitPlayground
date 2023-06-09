@@ -8,20 +8,21 @@
 import Foundation
 
 struct LookUpModel: Codable {
-    
+    let resultCount: Int
     let results: [LookUpDetail]
 }
 
 // MARK: - Result
 struct LookUpDetail: Codable {
     let screenshotUrls: [String]
-    let artworkUrl60, artworkUrl512, artworkUrl100, artistName: String
+    let artworkUrl60, artworkUrl512, artworkUrl100: String
+    let artistName: String
     let trackID: Int
     let trackName: String
     let userRatingCountForCurrentVersion: Int
     let averageUserRating: Double
     let userRatingCount: Int
-    let language: [String]
+    let languageCodesISO2A: [String]
     let genres: [String]
     
 
@@ -29,8 +30,8 @@ struct LookUpDetail: Codable {
         case screenshotUrls,artworkUrl60, artworkUrl512, artworkUrl100 , artistName
         case trackID = "trackId"
         case trackName
-        case userRatingCountForCurrentVersion, averageUserRating , genres
+        case userRatingCountForCurrentVersion, averageUserRating
+        case genres , languageCodesISO2A
         case userRatingCount
-        case language = "languageCodesISO2A"
     }
 }

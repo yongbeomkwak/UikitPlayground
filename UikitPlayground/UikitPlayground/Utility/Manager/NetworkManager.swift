@@ -37,7 +37,7 @@ class NetworkManager {
     
     func loadSearchResult(term:String,completion:@escaping (SearchResultModel) -> Void)
     {
-  
+        
         parseData(requestURL: SearchAPI.fetchSearch(text: term).url) { data in
             let decoder = JSONDecoder()
             guard let result = try? decoder.decode(SearchResultModel.self, from: data) else {return}
@@ -45,8 +45,18 @@ class NetworkManager {
             completion(result)
         }
         
-   
+    }
+    
+    func loadLookupResult(id:Int,completion:@escaping (LookUpModel) -> Void)
+    {
         
+        parseData(requestURL: SearchAPI.fetchLookupDetail(id:id).url) { data in
+            let decoder = JSONDecoder()
+            
+           guard let result = try? decoder.decode(LookUpModel.self, from: data) else {return}
+            
+            completion(result)
+        }
     }
     
     

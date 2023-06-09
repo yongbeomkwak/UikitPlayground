@@ -9,7 +9,7 @@ import Foundation
 
 public enum SearchAPI {
     case fetchSearch(text:String)
-    case fetchdetail(id:String)
+    case fetchLookupDetail(id:Int)
 }
 
 extension SearchAPI:AppStoreAPI{
@@ -18,7 +18,7 @@ extension SearchAPI:AppStoreAPI{
         switch self {
         case .fetchSearch:
             return .search
-        case .fetchdetail:
+        case .fetchLookupDetail:
             return .lookup
         }
     }
@@ -44,12 +44,12 @@ extension SearchAPI:AppStoreAPI{
             
             
             
-        case .fetchdetail(id: let id):
+        case .fetchLookupDetail(id: let id):
             var component = URLComponents(string: path)
             
             var queryItemArray:[URLQueryItem] = []
             
-            queryItemArray.append( URLQueryItem(name: "id", value: id ))
+            queryItemArray.append( URLQueryItem(name: "id", value: String(id) ))
 
             
             component?.queryItems = queryItemArray

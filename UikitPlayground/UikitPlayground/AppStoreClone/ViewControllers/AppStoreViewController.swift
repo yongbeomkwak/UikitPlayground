@@ -106,6 +106,7 @@ extension AppStoreViewController: UISearchBarDelegate{
         activityIndicator.startAnimating()
         
         NetworkManager.shared.loadSearchResult(term: text) {[weak self] result in
+
             
             DispatchQueue.main.async {
                 guard let self else {return}
@@ -114,10 +115,11 @@ extension AppStoreViewController: UISearchBarDelegate{
                 self.activityIndicator.isHidden = true
                 
                 //인디케이터 종료
-                
-                
                 //DI 및 검색 후 화면 뷰컨 추가
                 self.add(asChildViewController: SearchResultViewController.viewController(viewModel: SearchResultViewModel(dataSource: result)))
+                
+                
+                
             }
         }
         
