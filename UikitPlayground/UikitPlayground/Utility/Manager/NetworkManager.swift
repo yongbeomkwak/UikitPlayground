@@ -15,9 +15,30 @@ class NetworkManager {
     
     private let searchApi = "https://itunes.apple.com/search"
     
+    func parseData(requestURL:URL,completion:@escaping (Data) -> Void){
+        
+        let task = URLSession.shared.dataTask(with: requestURL) { data, response, error in
+
+            guard  let data = data ,error == nil else {
+                DEBUG_LOG("ERROR Occured")
+                return
+            }
+
+         
+            // 컴플리션 호출
+            completion(data)
+        }
+
+
+        DispatchQueue.global(qos: .background).async {
+            task.resume()
+        }
+    }
     
-    func loadSearchResult(term:String,completion: @escaping (SearchResultModel) -> Void)
-    {
+
+    
+    func loadSearchResult(term:String,completion:@escaping (SearchResultModel) -> Void)
+    {ㅌ
         guard var urlComponent = URLComponents(string: searchApi) else {return }
         
         var queryItemArray:[URLQueryItem] = []
@@ -37,28 +58,17 @@ class NetworkManager {
         
         guard let requestURL = urlComponent.url else { return }
         
-        
-        
-        let task = URLSession.shared.dataTask(with: requestURL) { data, response, error in
-            
-            guard  let data = data ,error == nil else {
-                DEBUG_LOG("ERROR Occured")
-                return
-            }
-            
+        parseData(requestURL: requestURL) { data in
             let decoder = JSONDecoder()
             guard let result = try? decoder.decode(SearchResultModel.self, from: data) else {return}
-            
-            //디코딩 후 , 컴플리션 호출
             
             completion(result)
         }
         
-        
-        DispatchQueue.global(qos: .background).async {
-            task.resume()
-        }
+   
         
     }
+    
+    
     
 }
