@@ -35,7 +35,7 @@ extension SearchResultViewController{
     
     private func configureUI(){
         tableView.dataSource = self
-        //tableView.delegate = self
+        tableView.delegate = self
     }
 }
 
@@ -60,4 +60,11 @@ extension SearchResultViewController: UITableViewDataSource {
     
     
     
+}
+
+extension SearchResultViewController: UITableViewDelegate{
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 400
+    }
 }

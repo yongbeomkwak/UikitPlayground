@@ -17,10 +17,22 @@ class ScreenShotCollectionViewCell: UICollectionViewCell {
         
         self.screenShotImageView.layer.cornerRadius = 24
         self.screenShotImageView.clipsToBounds = true
-            update()
+        
     }
 
-    private func update(){
+    public func update(url:String){
+        
+        
+        ImageCacheManager.shared.loadImage(url: url) {[weak self] data in
+            
+            guard let self else {return}
+            
+            DispatchQueue.main.async {
+                self.screenShotImageView.image = UIImage(data: data)
+            }
+            
+            
+        }
         
     }
     

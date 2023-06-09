@@ -35,7 +35,7 @@ class SearchResultTableViewCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     
     var stars:[UIImageView] = [UIImageView(),UIImageView(),UIImageView(),UIImageView(),UIImageView()]
-    
+    var dataSource:[String] = []
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -63,6 +63,9 @@ class SearchResultTableViewCell: UITableViewCell {
         stars[4] = fifthStarImageView
         
         initializeStar()
+        
+        collectionView.dataSource = self
+     
 
     }
     
@@ -174,8 +177,38 @@ class SearchResultTableViewCell: UITableViewCell {
         }
         
         //구구  컬렉션 뷰를 TableView 안에서 가능??
+        dataSource = model.screenshotUrls
+        collectionView.reloadData()
     }
 
 
 
+}
+
+//extension SearchResultTableViewCell:UICollectionViewDelegate,UICollectionViewDelegateFlowLayout{
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        return CGSize(width: 242, height: 432)
+//    }
+//
+//
+//}
+
+extension SearchResultTableViewCell:UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return dataSource.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ScreenShotCollectionViewCell", for: indexPath) as? ScreenShotCollectionViewCell else {
+            return UICollectionViewCell()
+            
+        }
+        
+        let row = indexPath.row
+        
+        cell.update(url: dataSource[row])
+        
+        return cell
+    }
 }
