@@ -38,7 +38,7 @@ class NetworkManager {
 
     
     func loadSearchResult(term:String,completion:@escaping (SearchResultModel) -> Void)
-    {ㅌ
+    {
         guard var urlComponent = URLComponents(string: searchApi) else {return }
         
         var queryItemArray:[URLQueryItem] = []
