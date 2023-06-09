@@ -36,6 +36,7 @@ class SearchResultTableViewCell: UITableViewCell {
     
     var stars:[UIImageView] = [UIImageView(),UIImageView(),UIImageView(),UIImageView(),UIImageView()]
     var dataSource:[String] = []
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -53,8 +54,9 @@ class SearchResultTableViewCell: UITableViewCell {
         
         self.installButton.setTitle("받기", for: .normal)
         self.installButton.tintColor = .systemBlue
-        self.installButton.layer.cornerRadius = 48
-        //구구 버튼 둥그렇게 ?? 왜 안될까..
+        self.installButton.layer.cornerRadius = 12.5
+        self.installButton.clipsToBounds = true
+
         
         stars[0] = firstStarImageView
         stars[1] = secondStarImageView
@@ -78,9 +80,7 @@ class SearchResultTableViewCell: UITableViewCell {
     
     private func convertRatingToKor(rate:Int) -> String {
 
-        
-        
-        
+
         
         let len:Int = String(rate).count
         
@@ -176,7 +176,7 @@ class SearchResultTableViewCell: UITableViewCell {
             
         }
         
-        //구구  컬렉션 뷰를 TableView 안에서 가능??
+        
         dataSource = model.screenshotUrls
         collectionView.reloadData()
     }
@@ -185,17 +185,35 @@ class SearchResultTableViewCell: UITableViewCell {
 
 }
 
-//extension SearchResultTableViewCell:UICollectionViewDelegate,UICollectionViewDelegateFlowLayout{
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: 242, height: 432)
+extension SearchResultTableViewCell:UICollectionViewDelegate,UICollectionViewDelegateFlowLayout{
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let width = (UIScreen.main.bounds.width - CGFloat(60))/CGFloat(3)
+        let height = width * 696 / 392
+        
+        return CGSize(width: width, height: height) // 컬렉션 뷰 셀 하나의 크기(너비,높이)
+    }
+
+//    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//
+//        // 스크롤이 끝까지 되었을 때 , collectinView 자체 인셋 설정
+//        return UIEdgeInsets(top: 0, left: 30.0, bottom: 0, right: 30.0)
+//    }
+
+//    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        return 50.0
 //    }
 //
-//
-//}
+//    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+//        return 50.0
+//    }
+
+}
 
 extension SearchResultTableViewCell:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.count
+        return min(3,dataSource.count)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -212,3 +230,4 @@ extension SearchResultTableViewCell:UICollectionViewDataSource{
         return cell
     }
 }
+
