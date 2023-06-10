@@ -59,5 +59,22 @@ extension LookUpViewController {
         }
         
         
+        self.titleLabel.font = .systemFont(ofSize: 15, weight: .bold)
+        self.titleLabel.text = model.trackName
+        
+        self.developerNameLabel.font = .systemFont(ofSize: 12, weight: .light)
+        self.developerNameLabel.textColor = .systemGray2
+        self.developerNameLabel.text = model.artistName
+        
+        
+        self.installButton.setTitle("받기", for: .normal)
+        self.installButton.tintColor = .white
+        self.installButton.backgroundColor = .systemBlue
+        self.installButton.layer.cornerRadius = 12.5
+        self.installButton.clipsToBounds = true
+        
+        self.shareButton.tintColor = .systemBlue
+        self.shareButton.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
+        
     }
 }

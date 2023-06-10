@@ -333,22 +333,22 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hda-5c-kfM">
-                                                        <rect key="frame" x="130" y="20" width="100" height="20.333333333333329"/>
+                                                        <rect key="frame" x="135" y="20" width="95" height="20.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zi7-0O-8UB">
-                                                        <rect key="frame" x="130" y="45.333333333333329" width="100" height="20.333333333333329"/>
+                                                        <rect key="frame" x="135" y="45.333333333333329" width="95" height="20.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qr9-G5-MXH">
-                                                        <rect key="frame" x="130" y="95" width="50" height="25"/>
+                                                        <rect key="frame" x="135" y="95" width="60" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="25" id="KOw-4W-Uq1"/>
-                                                            <constraint firstAttribute="width" constant="50" id="eju-Ck-gWM"/>
+                                                            <constraint firstAttribute="width" constant="60" id="eju-Ck-gWM"/>
                                                         </constraints>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain"/>
@@ -375,7 +375,7 @@
                                                     <constraint firstItem="Qr9-G5-MXH" firstAttribute="leading" secondItem="hda-5c-kfM" secondAttribute="leading" id="g1V-ZY-tc9"/>
                                                     <constraint firstItem="d0b-9q-3oc" firstAttribute="leading" secondItem="sRa-Me-e7x" secondAttribute="leading" constant="20" id="hNO-dO-UxT"/>
                                                     <constraint firstItem="d0b-9q-3oc" firstAttribute="top" secondItem="sRa-Me-e7x" secondAttribute="top" constant="20" id="rtO-yq-jK4"/>
-                                                    <constraint firstItem="hda-5c-kfM" firstAttribute="leading" secondItem="d0b-9q-3oc" secondAttribute="trailing" constant="10" id="vxm-Yx-8Ax"/>
+                                                    <constraint firstItem="hda-5c-kfM" firstAttribute="leading" secondItem="d0b-9q-3oc" secondAttribute="trailing" constant="15" id="vxm-Yx-8Ax"/>
                                                     <constraint firstAttribute="height" constant="300" id="w5N-eP-Ebh"/>
                                                     <constraint firstItem="Zi7-0O-8UB" firstAttribute="trailing" secondItem="hda-5c-kfM" secondAttribute="trailing" id="zW2-do-SIY"/>
                                                 </constraints>
