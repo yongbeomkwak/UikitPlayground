@@ -13,7 +13,7 @@ class NetworkManager {
     
     static let shared = NetworkManager()
         
-    func parseData(requestURL:URL,completion:@escaping (Data) -> Void){
+    private func parseData(requestURL:URL,completion:@escaping (Data) -> Void){
         
         let task = URLSession.shared.dataTask(with: requestURL) { data, response, error in
 
