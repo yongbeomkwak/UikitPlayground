@@ -37,7 +37,6 @@ class NetworkManager {
     
     func loadSearchResult(term:String,completion:@escaping (SearchResultModel) -> Void)
     {
-        
         parseData(requestURL: SearchAPI.fetchSearch(text: term).url) { data in
             let decoder = JSONDecoder()
             guard let result = try? decoder.decode(SearchResultModel.self, from: data) else {return}

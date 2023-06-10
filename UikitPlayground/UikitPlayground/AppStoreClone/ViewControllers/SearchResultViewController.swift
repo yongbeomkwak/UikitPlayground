@@ -78,19 +78,8 @@ extension SearchResultViewController: UITableViewDelegate{
         
         let id = viewModel.dataSource.results[indexPath.row].trackID
          
-        
-        NetworkManager.shared.loadLookupResult(id: id) { dataSource in
-            
-           
-        //  구구 , 뷰컨 만들어지는 위치에 대한 스레드 출력문 질문
-            DispatchQueue.main.async {
-                let LookUpVc = LookUpViewController.viewController(viewModel: LookupViewModel(dataSource: dataSource) )
-                self.navigationController?.pushViewController(LookUpVc, animated: true)
-            }
-            
-        }
-        
-        
+        let LookUpVc = LookUpViewController.viewController(viewModel: LookupViewModel(id: id ))
+        self.navigationController?.pushViewController(LookUpVc, animated: true)
         
         
     }

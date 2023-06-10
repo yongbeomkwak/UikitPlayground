@@ -9,8 +9,8 @@ import Foundation
 
 class LookupViewModel:ViewModelType{
     
-    var dataSource:LookUpModel!
-    
+    var dataSource:LookUpModel?
+    var id:Int!
     
     public struct Input{
         
@@ -20,14 +20,27 @@ class LookupViewModel:ViewModelType{
         
     }
     
-    init(dataSource:LookUpModel){
-        self.dataSource = dataSource
-        
+    init(id:Int){
+        self.id = id
+        self.dataSource = nil
     }
+    
     
     public func transform(from input: Input) -> Output {
         
         return Output()
+    }
+    
+    public func fetchData(completion:@escaping (LookUpModel) -> Void){
+        
+        NetworkManager.shared.loadLookupResult(id: self.id) { [weak self] dataSource in
+            
+            self?.dataSource = dataSource
+            
+            completion(dataSource)
+            
+        }
+        
     }
     
 }

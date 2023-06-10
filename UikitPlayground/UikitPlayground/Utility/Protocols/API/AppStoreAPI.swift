@@ -22,8 +22,6 @@ public protocol AppStoreAPI{
 }
 
 
-
-
 extension AppStoreAPI{
     
     var baseUrl:String {

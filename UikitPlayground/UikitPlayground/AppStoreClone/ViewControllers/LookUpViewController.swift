@@ -24,6 +24,9 @@ class LookUpViewController: BaseViewController,ViewControllerFromStoryBoard {
         super.viewDidLoad()
         
         configureUI()
+        bindCompletion()
+        
+       
        
     }
     
@@ -41,30 +44,27 @@ class LookUpViewController: BaseViewController,ViewControllerFromStoryBoard {
 
 
 extension LookUpViewController {
+    
+    
+
+    
     func configureUI(){
+        
         
         self.thumbNailImageView.layer.cornerRadius = 12
         self.thumbNailImageView.clipsToBounds = true
         
-        guard let model = viewModel.dataSource.results.first else {
-            return
-        }
+       
         
-        ImageCacheManager.shared.loadImage(url: model.artworkUrl512) { data in
-            
-            DispatchQueue.main.async { [weak self] in
-                guard let self else {return}
-                self.thumbNailImageView.image = UIImage(data: data)
-            }
-        }
+
         
         
         self.titleLabel.font = .systemFont(ofSize: 15, weight: .bold)
-        self.titleLabel.text = model.trackName
+       
         
         self.developerNameLabel.font = .systemFont(ofSize: 12, weight: .light)
         self.developerNameLabel.textColor = .systemGray2
-        self.developerNameLabel.text = model.artistName
+       
         
         
         self.installButton.setTitle("받기", for: .normal)
@@ -76,5 +76,40 @@ extension LookUpViewController {
         self.shareButton.tintColor = .systemBlue
         self.shareButton.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
         
+    }
+    
+    func bindCompletion() {
+        viewModel.fetchData { [weak self] result in
+
+            guard let self else {return}
+            guard let model = result.results.first else {return}
+            
+            DispatchQueue.main.async {
+                self.titleLabel.text = model.trackName
+                self.developerNameLabel.text = model.artistName
+            }
+            
+            
+            
+            
+            ImageCacheManager.shared.loadImage(url: model.artworkUrl512) {[weak self] data in
+                
+                guard let self else {return}
+                
+                
+                DispatchQueue.main.async {
+                    self.thumbNailImageView.image = UIImage(data: data)
+                }
+                
+                
+            }
+        }
+    }
+}
+
+
+extension LookUpViewController:UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     }
 }
