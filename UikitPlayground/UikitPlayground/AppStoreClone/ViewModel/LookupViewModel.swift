@@ -7,10 +7,19 @@
 
 import Foundation
 
+public enum RatingCase {
+    case starRating
+    case age
+    case chart
+    case dev
+    case lan
+}
+
 class LookupViewModel:ViewModelType{
     
     var dataSource:LookUpModel?
     var id:Int!
+    let ratingCase: [RatingCase] = [.starRating,.age,.chart,.dev,.lan]
     
     public struct Input{
         

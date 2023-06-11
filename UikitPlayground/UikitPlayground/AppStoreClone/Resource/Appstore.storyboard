@@ -493,7 +493,7 @@
                                                             <outlet property="languageTitleLabel" destination="Ud9-be-L9d" id="Dri-dj-fHt"/>
                                                         </connections>
                                                     </collectionViewCell>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="4DE-GK-c2F">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LookUpDevCell" id="4DE-GK-c2F" customClass="LookUpDevCell" customModule="UikitPlayground" customModuleProvider="target">
                                                         <rect key="frame" x="276" y="11" width="128" height="128"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="z58-ax-DAQ">
@@ -539,56 +539,69 @@
                                                                 <constraint firstItem="Jp2-2p-hme" firstAttribute="centerX" secondItem="z58-ax-DAQ" secondAttribute="centerX" id="qiT-gx-DBd"/>
                                                             </constraints>
                                                         </collectionViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="imageView" destination="6JS-M2-a1T" id="otf-TF-d13"/>
+                                                            <outlet property="seperatorView" destination="koa-bQ-Irx" id="ab3-bA-bt6"/>
+                                                            <outlet property="subTitleLabel" destination="Jp2-2p-hme" id="jy6-26-hxc"/>
+                                                            <outlet property="titleLabel" destination="ehH-0p-hry" id="CCv-go-LcP"/>
+                                                        </connections>
                                                     </collectionViewCell>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LookUpCollectionViewCell" id="hmr-eb-URF" customClass="LookUpRatingCell" customModule="UikitPlayground" customModuleProvider="target">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LookUpRatingCell" id="hmr-eb-URF" customClass="LookUpRatingCell" customModule="UikitPlayground" customModuleProvider="target">
                                                         <rect key="frame" x="414" y="11" width="128" height="128"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="7Ik-6g-Ufp">
+                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="7Ik-6g-Ufp">
                                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BSS-i0-1LV">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BSS-i0-1LV">
                                                                     <rect key="frame" x="43.333333333333329" y="9.9999999999999982" width="41.333333333333329" height="20.333333333333329"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jRm-jK-z2r">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jRm-jK-z2r">
                                                                     <rect key="frame" x="43.333333333333329" y="54.000000000000007" width="41.333333333333329" height="20.333333333333336"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="AMw-RW-qwh">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h4m-7G-hkg">
+                                                                    <rect key="frame" x="127" y="30" width="1" height="68"/>
+                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="1" id="KZz-69-nXn"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="AMw-RW-qwh">
                                                                     <rect key="frame" x="16.666666666666671" y="103" width="95" height="15"/>
                                                                     <subviews>
-                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2MF-x3-NFl">
+                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2MF-x3-NFl">
                                                                             <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="15" id="Iq0-LS-Ceg"/>
                                                                                 <constraint firstAttribute="width" constant="15" id="c0R-gO-AbF"/>
                                                                             </constraints>
                                                                         </imageView>
-                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="50y-GY-yIg">
-                                                                            <rect key="frame" x="20" y="0.0" width="15" height="15"/>
+                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="50y-GY-yIg">
+                                                                            <rect key="frame" x="19.999999999999996" y="0.0" width="15.000000000000004" height="15"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="15" id="QWk-zW-Qe4"/>
                                                                                 <constraint firstAttribute="width" constant="15" id="d9b-M0-8DT"/>
                                                                             </constraints>
                                                                         </imageView>
-                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4hw-hV-q88">
+                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4hw-hV-q88">
                                                                             <rect key="frame" x="40" y="0.0" width="15" height="15"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="15" id="FcW-rb-HI9"/>
                                                                             </constraints>
                                                                         </imageView>
-                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="roj-yY-VzU">
+                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="roj-yY-VzU">
                                                                             <rect key="frame" x="60" y="0.0" width="15" height="15"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="15" id="Sos-WX-vKw"/>
                                                                             </constraints>
                                                                         </imageView>
-                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GCJ-xO-uht">
+                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GCJ-xO-uht">
                                                                             <rect key="frame" x="80" y="0.0" width="15" height="15"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="15" id="Nw7-54-Rya"/>
@@ -601,7 +614,10 @@
                                                                 <constraint firstAttribute="bottom" secondItem="AMw-RW-qwh" secondAttribute="bottom" constant="10" id="1JC-bQ-5C8"/>
                                                                 <constraint firstItem="BSS-i0-1LV" firstAttribute="centerX" secondItem="7Ik-6g-Ufp" secondAttribute="centerX" id="566-2E-cHs"/>
                                                                 <constraint firstItem="jRm-jK-z2r" firstAttribute="centerY" secondItem="7Ik-6g-Ufp" secondAttribute="centerY" id="8n7-NC-Nu5"/>
+                                                                <constraint firstItem="h4m-7G-hkg" firstAttribute="top" secondItem="7Ik-6g-Ufp" secondAttribute="top" constant="30" id="Bs1-Rg-Oqe"/>
                                                                 <constraint firstItem="AMw-RW-qwh" firstAttribute="centerX" secondItem="7Ik-6g-Ufp" secondAttribute="centerX" id="HZM-SY-RDN"/>
+                                                                <constraint firstAttribute="trailing" secondItem="h4m-7G-hkg" secondAttribute="trailing" id="KMQ-8u-r7e"/>
+                                                                <constraint firstAttribute="bottom" secondItem="h4m-7G-hkg" secondAttribute="bottom" constant="30" id="MaV-qY-8N9"/>
                                                                 <constraint firstItem="BSS-i0-1LV" firstAttribute="top" secondItem="7Ik-6g-Ufp" secondAttribute="top" constant="10" id="fvk-WA-O5l"/>
                                                                 <constraint firstItem="jRm-jK-z2r" firstAttribute="centerX" secondItem="7Ik-6g-Ufp" secondAttribute="centerX" id="s1t-lu-53I"/>
                                                             </constraints>
@@ -613,6 +629,7 @@
                                                             <outlet property="ratingLabel" destination="jRm-jK-z2r" id="vB0-xs-kDY"/>
                                                             <outlet property="reviewsLabel" destination="BSS-i0-1LV" id="Qw3-yD-Rj3"/>
                                                             <outlet property="secondStarImageView" destination="50y-GY-yIg" id="XV6-EH-POW"/>
+                                                            <outlet property="seperatorView" destination="h4m-7G-hkg" id="t1A-S8-nMH"/>
                                                             <outlet property="thirdStarImageView" destination="4hw-hV-q88" id="ouq-ad-UBO"/>
                                                         </connections>
                                                     </collectionViewCell>
@@ -654,6 +671,7 @@
                         <outlet property="shareButton" destination="yla-IN-SHN" id="NQZ-16-5JL"/>
                         <outlet property="thumbNailImageView" destination="d0b-9q-3oc" id="rAb-NZ-itd"/>
                         <outlet property="titleLabel" destination="hda-5c-kfM" id="NBy-O8-TP3"/>
+                        <outlet property="topCollectionView" destination="xrK-Op-dRJ" id="8bq-d1-ySi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qLf-0K-igy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

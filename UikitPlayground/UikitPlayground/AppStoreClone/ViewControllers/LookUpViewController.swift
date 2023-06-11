@@ -16,6 +16,8 @@ class LookUpViewController: BaseViewController,ViewControllerFromStoryBoard {
     @IBOutlet weak var installButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
     
+    @IBOutlet weak var topCollectionView: UICollectionView!
+    
     var viewModel:LookupViewModel!
     
     
@@ -76,6 +78,10 @@ extension LookUpViewController {
         self.shareButton.tintColor = .systemBlue
         self.shareButton.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
         
+        
+        self.topCollectionView.dataSource = self
+        self.topCollectionView.delegate = self
+        
     }
     
     func bindCompletion() {
@@ -110,6 +116,50 @@ extension LookUpViewController {
 
 extension LookUpViewController:UICollectionViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+}
+
+extension LookUpViewController:UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        if collectionView == self.topCollectionView {
+            return 1
+        }
+        else {
+            return 0
+        }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let model = viewModel.dataSource?.results.first else {
+            return UICollectionViewCell()
+        }
+        
+        if collectionView == self.topCollectionView {
+            
+            switch viewModel.ratingCase[indexPath.row] {
+                
+            case .starRating:
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LookUpRatingCell", for: indexPath) as? LookUpRatingCell else {
+                    return UICollectionViewCell()
+                }
+                
+                cell.update(numberOfRating: model.userRatingCount, rating: model.averageUserRating)
+                return cell
+                
+            default:
+                return UICollectionViewCell()
+                
+            }
+            
+            
+        }
+        else {
+            return UICollectionViewCell()
+        }
+        
+    }
+    
+    
 }
