@@ -19,6 +19,8 @@ class LookUpViewController: BaseViewController,ViewControllerFromStoryBoard {
     @IBOutlet weak var topCollectionView: UICollectionView!
     
     @IBOutlet weak var newFunctionLabel: UILabel!
+    @IBOutlet weak var bottomCollectionView: UICollectionView!
+    
     var viewModel:LookupViewModel!
     
     
@@ -122,8 +124,9 @@ extension LookUpViewController {
                 self.developerNameLabel.text = model.artistName
                 self.newFunctionLabel.text = model.releaseNotes
                 self.topCollectionView.dataSource = self
-                self.topCollectionView.delegate = self
-                
+                self.bottomCollectionView.dataSource = self
+                self.bottomCollectionView.delegate = self
+                self.bottomCollectionView.reloadData()
             }
             
             
@@ -146,7 +149,46 @@ extension LookUpViewController {
 }
 
 
-extension LookUpViewController:UICollectionViewDelegate {
+extension LookUpViewController:UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    
+        if collectionView == bottomCollectionView{
+        
+            
+            
+            guard let count = viewModel.dataSource?.results.first?.screenshotUrls.count else { return .zero }
+            
+            let width = (UIScreen.main.bounds.width + 50 ) / 2
+            let height = width * 696 / 392
+            
+            
+            DEBUG_LOG("LOG ")
+            
+            
+            return CGSize(width: width, height: height) // 컬렉션 뷰 셀 하나의 크기(너비,높이)
+            
+        }
+        
+        else {
+            return CGSize.zero
+        }
+    }
+
+//    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//
+//        // 스크롤이 끝까지 되었을 때 , collectinView 자체 인셋 설정
+//        return UIEdgeInsets(top: 0, left: 30.0, bottom: 0, right: 30.0)
+//    }
+
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0 //셀 사이간격
+    }
+
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
+    }
+
     
 
 }
@@ -158,7 +200,11 @@ extension LookUpViewController:UICollectionViewDataSource {
             return viewModel.ratingCase.count
         }
         else {
-            return 0
+            
+            guard let model = viewModel.dataSource?.results.first else { return 0 }
+            
+            
+            return model.screenshotUrls.count
         }
     }
     
@@ -223,7 +269,15 @@ extension LookUpViewController:UICollectionViewDataSource {
             
         }
         else {
-            return UICollectionViewCell()
+           
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LookUpScreenShotCollectionViewCell", for: indexPath) as? LookUpScreenShotCollectionViewCell else { return UICollectionViewCell()}
+            
+            guard let model = viewModel.dataSource?.results.first else { return UICollectionViewCell() }
+            
+            cell.update(model.screenshotUrls[indexPath.row])
+            
+            return cell
+            
         }
         
     }
