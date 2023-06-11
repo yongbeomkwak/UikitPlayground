@@ -320,7 +320,7 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="YVv-eV-U1t">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="301"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="451"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sRa-Me-e7x">
                                                 <rect key="frame" x="0.0" y="0.0" width="393" height="150"/>
@@ -635,12 +635,66 @@
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="36u-0k-3r9">
+                                                <rect key="frame" x="0.0" y="301" width="393" height="150"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="새로운 기능" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xVU-Qs-N1W">
+                                                        <rect key="frame" x="20.000000000000007" y="10" width="113.66666666666669" height="30"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SZv-Ao-4Yd">
+                                                        <rect key="frame" x="316" y="10" width="67" height="34"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="버전 기록">
+                                                            <color key="titleColor" name="AccentColor"/>
+                                                        </state>
+                                                    </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6개월 전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZQG-t7-Cvn">
+                                                        <rect key="frame" x="324" y="43" width="59" height="20.333333333333329"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" systemColor="opaqueSeparatorColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="버전 1.20.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BsP-kN-x0v">
+                                                        <rect key="frame" x="20" y="43" width="81.666666666666671" height="20.333333333333329"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                        <color key="textColor" systemColor="systemGray3Color"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LpC-hh-uWc">
+                                                        <rect key="frame" x="20" y="83.333333333333314" width="353" height="20.333333333333329"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="xVU-Qs-N1W" firstAttribute="top" secondItem="36u-0k-3r9" secondAttribute="top" constant="10" id="5rb-pf-TwG"/>
+                                                    <constraint firstItem="BsP-kN-x0v" firstAttribute="leading" secondItem="xVU-Qs-N1W" secondAttribute="leading" id="Cf1-Ax-1IU"/>
+                                                    <constraint firstItem="SZv-Ao-4Yd" firstAttribute="top" secondItem="xVU-Qs-N1W" secondAttribute="top" id="FLR-hH-MQw"/>
+                                                    <constraint firstItem="BsP-kN-x0v" firstAttribute="top" secondItem="xVU-Qs-N1W" secondAttribute="bottom" constant="3" id="Jqm-0l-uhu"/>
+                                                    <constraint firstItem="ZQG-t7-Cvn" firstAttribute="top" secondItem="BsP-kN-x0v" secondAttribute="top" id="O31-Xa-1oJ"/>
+                                                    <constraint firstItem="ZQG-t7-Cvn" firstAttribute="trailing" secondItem="SZv-Ao-4Yd" secondAttribute="trailing" id="gkL-4T-rba"/>
+                                                    <constraint firstAttribute="trailing" secondItem="SZv-Ao-4Yd" secondAttribute="trailing" constant="10" id="jfH-vG-wMa"/>
+                                                    <constraint firstItem="xVU-Qs-N1W" firstAttribute="leading" secondItem="36u-0k-3r9" secondAttribute="leading" constant="20" id="kZb-cx-Lpw"/>
+                                                    <constraint firstAttribute="trailing" secondItem="LpC-hh-uWc" secondAttribute="trailing" constant="20" id="khx-81-1Jp"/>
+                                                    <constraint firstAttribute="height" constant="150" id="nO9-th-FZS"/>
+                                                    <constraint firstItem="LpC-hh-uWc" firstAttribute="top" secondItem="BsP-kN-x0v" secondAttribute="bottom" constant="20" id="rSH-St-lVY"/>
+                                                    <constraint firstItem="LpC-hh-uWc" firstAttribute="leading" secondItem="BsP-kN-x0v" secondAttribute="leading" id="zOt-hm-SEl"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="sRa-Me-e7x" secondAttribute="trailing" id="4UO-Ha-JLu"/>
                                             <constraint firstAttribute="trailing" secondItem="xrK-Op-dRJ" secondAttribute="trailing" id="Je0-Bq-LyT"/>
                                             <constraint firstItem="xrK-Op-dRJ" firstAttribute="leading" secondItem="YVv-eV-U1t" secondAttribute="leading" constant="20" id="Yiz-cS-iY8"/>
                                             <constraint firstItem="sRa-Me-e7x" firstAttribute="leading" secondItem="YVv-eV-U1t" secondAttribute="leading" id="bkc-Ez-1AW"/>
+                                            <constraint firstItem="36u-0k-3r9" firstAttribute="leading" secondItem="YVv-eV-U1t" secondAttribute="leading" id="dP7-N3-hiP"/>
+                                            <constraint firstAttribute="trailing" secondItem="36u-0k-3r9" secondAttribute="trailing" id="gFS-qz-37z"/>
                                             <constraint firstItem="L2s-l7-yjh" firstAttribute="leading" secondItem="YVv-eV-U1t" secondAttribute="leading" constant="20" id="k4h-hA-jkO"/>
                                             <constraint firstAttribute="trailing" secondItem="L2s-l7-yjh" secondAttribute="trailing" id="odb-Ar-ark"/>
                                         </constraints>
@@ -667,6 +721,7 @@
                     <connections>
                         <outlet property="developerNameLabel" destination="Zi7-0O-8UB" id="p0A-p2-Lbd"/>
                         <outlet property="installButton" destination="Qr9-G5-MXH" id="wcg-vR-fBN"/>
+                        <outlet property="newFunctionLabel" destination="LpC-hh-uWc" id="WDW-mn-9vs"/>
                         <outlet property="scrollView" destination="441-0W-iJH" id="mgO-za-7A4"/>
                         <outlet property="shareButton" destination="yla-IN-SHN" id="NQZ-16-5JL"/>
                         <outlet property="thumbNailImageView" destination="d0b-9q-3oc" id="rAb-NZ-itd"/>
@@ -707,6 +762,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray3Color">
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

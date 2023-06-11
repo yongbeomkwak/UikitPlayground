@@ -18,6 +18,7 @@ class LookUpViewController: BaseViewController,ViewControllerFromStoryBoard {
     
     @IBOutlet weak var topCollectionView: UICollectionView!
     
+    @IBOutlet weak var newFunctionLabel: UILabel!
     var viewModel:LookupViewModel!
     
     
@@ -59,10 +60,7 @@ extension LookUpViewController {
         self.thumbNailImageView.layer.cornerRadius = 12
         self.thumbNailImageView.clipsToBounds = true
         
-       
-        
 
-        
         
         self.titleLabel.font = .systemFont(ofSize: 15, weight: .bold)
        
@@ -81,7 +79,35 @@ extension LookUpViewController {
         self.shareButton.tintColor = .systemBlue
         self.shareButton.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
         
+        self.newFunctionLabel.lineBreakMode = .byCharWrapping
+        /*
+         컨테이너에 맞지 않는 단락의 줄 바꿈 모드입니다.
+         🍎 레이블의 텍스트를 줄 바꿈하고 자르는 기술이다.
+         
+         1. .byWordWrapping
+        - Character Wrap과 비슷하지만, 개별 문자가 아니라 단어 기준으로 줄바꿈합니다. 즉, 단어 중간을 끊어 줄바꿈하지 않는다는 뜻입니다. 이 때문에 단어 전체가 들어갈 공간이 충분하지 않으면 남은 공간이 있더라도 다음 라인으로 줄바꿈하는 특성이 있습니다.
+         
+         2. .byCharWrapping
+        - 개별 문자 단위로 줄바꿈합니다. 하나의 단어가 완전히 끝나지 않았어도 라인의 끝에 도착하면 다음 라인으로 줄을 바꾸어 나머지 문자를 계속 출력합니다. 물론 Line 속성에서 설정된 라인 수를 넘어서면 나머지 텍스트는 표시하지 않습니다
+         
+         3. .byClipping
+        - 줄이 텍스트 컨테이너의 가장자리를 지나 확장되지 않음을 나타내는 값이다.
+         
+         4.  .byTruncatingHead
+         - 콘텐츠 출력에 필요한 라인 수보다 레이블에 설정된 Line 속성이 적을 경우, 마지막 라인의 첫 머리 텍스트 일부를 말줄임표로 처리합니다.
+         
+         5. Truncate Middle
+         
+         - 마지막 라인의 텍스트 중간을 말줄임표로 처리하고 라인의 앞과 뒤 텍스트를 보존하는 방식입니다.
+         
+            즉, 앞부분을 잘라내고 텍스트의 뒷부분을 보존하는 방식으로 콘텐츠를 표현합니다.
+         
+         
+         6. Truncate Tail
 
+         - 마지막 라인의 뒷부분을 잘라내어 말줄임표로 처리합니다. (가장 익숙한 처리 방식)
+            
+         */
         
     }
     
@@ -94,8 +120,10 @@ extension LookUpViewController {
             DispatchQueue.main.async {
                 self.titleLabel.text = model.trackName
                 self.developerNameLabel.text = model.artistName
+                self.newFunctionLabel.text = model.releaseNotes
                 self.topCollectionView.dataSource = self
                 self.topCollectionView.delegate = self
+                
             }
             
             

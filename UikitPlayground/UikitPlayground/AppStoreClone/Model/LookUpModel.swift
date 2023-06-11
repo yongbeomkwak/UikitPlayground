@@ -18,7 +18,7 @@ struct LookUpDetail: Codable {
     let artworkUrl60, artworkUrl512, artworkUrl100: String
     let artistName: String
     let trackID: Int
-    let trackName: String
+    let trackName,releaseNotes: String
     let userRatingCountForCurrentVersion: Int
     let averageUserRating: Double
     let userRatingCount: Int
@@ -29,7 +29,7 @@ struct LookUpDetail: Codable {
     enum CodingKeys: String, CodingKey {
         case screenshotUrls,artworkUrl60, artworkUrl512, artworkUrl100 , artistName
         case trackID = "trackId"
-        case trackName
+        case trackName ,releaseNotes
         case userRatingCountForCurrentVersion, averageUserRating
         case genres , languageCodesISO2A
         case userRatingCount
