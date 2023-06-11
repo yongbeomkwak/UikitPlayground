@@ -664,12 +664,22 @@
                                                         <color key="textColor" systemColor="systemGray3Color"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LpC-hh-uWc">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="characterWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LpC-hh-uWc">
                                                         <rect key="frame" x="20" y="83.333333333333314" width="353" height="20.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T2k-vJ-zAe">
+                                                        <rect key="frame" x="321" y="69.666666666666686" width="52" height="34"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="더 보기">
+                                                            <color key="titleColor" systemColor="systemBlueColor"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="pressShowMore:" destination="vah-rB-Zmw" eventType="touchUpInside" id="jer-By-KSH"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
@@ -677,9 +687,11 @@
                                                     <constraint firstItem="BsP-kN-x0v" firstAttribute="leading" secondItem="xVU-Qs-N1W" secondAttribute="leading" id="Cf1-Ax-1IU"/>
                                                     <constraint firstItem="SZv-Ao-4Yd" firstAttribute="top" secondItem="xVU-Qs-N1W" secondAttribute="top" id="FLR-hH-MQw"/>
                                                     <constraint firstItem="BsP-kN-x0v" firstAttribute="top" secondItem="xVU-Qs-N1W" secondAttribute="bottom" constant="3" id="Jqm-0l-uhu"/>
+                                                    <constraint firstItem="T2k-vJ-zAe" firstAttribute="trailing" secondItem="LpC-hh-uWc" secondAttribute="trailing" id="LaC-Qt-N8K"/>
                                                     <constraint firstItem="ZQG-t7-Cvn" firstAttribute="top" secondItem="BsP-kN-x0v" secondAttribute="top" id="O31-Xa-1oJ"/>
                                                     <constraint firstAttribute="bottom" secondItem="LpC-hh-uWc" secondAttribute="bottom" id="SYp-7g-LnP"/>
                                                     <constraint firstItem="ZQG-t7-Cvn" firstAttribute="trailing" secondItem="SZv-Ao-4Yd" secondAttribute="trailing" id="gkL-4T-rba"/>
+                                                    <constraint firstAttribute="bottom" secondItem="T2k-vJ-zAe" secondAttribute="bottom" id="h23-hf-lH9"/>
                                                     <constraint firstAttribute="trailing" secondItem="SZv-Ao-4Yd" secondAttribute="trailing" constant="10" id="jfH-vG-wMa"/>
                                                     <constraint firstItem="xVU-Qs-N1W" firstAttribute="leading" secondItem="36u-0k-3r9" secondAttribute="leading" constant="20" id="kZb-cx-Lpw"/>
                                                     <constraint firstAttribute="trailing" secondItem="LpC-hh-uWc" secondAttribute="trailing" constant="20" id="khx-81-1Jp"/>
@@ -790,6 +802,7 @@
                         <outlet property="bottomCollectionView" destination="2Wo-Jz-47a" id="Ylb-hb-DZV"/>
                         <outlet property="developerNameLabel" destination="Zi7-0O-8UB" id="p0A-p2-Lbd"/>
                         <outlet property="installButton" destination="Qr9-G5-MXH" id="wcg-vR-fBN"/>
+                        <outlet property="moreButton" destination="T2k-vJ-zAe" id="4f2-wr-LTN"/>
                         <outlet property="newFunctionLabel" destination="LpC-hh-uWc" id="WDW-mn-9vs"/>
                         <outlet property="scrollView" destination="441-0W-iJH" id="mgO-za-7A4"/>
                         <outlet property="shareButton" destination="yla-IN-SHN" id="NQZ-16-5JL"/>
@@ -831,6 +844,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray3Color">
             <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

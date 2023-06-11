@@ -21,6 +21,28 @@ class LookUpViewController: BaseViewController,ViewControllerFromStoryBoard {
     @IBOutlet weak var newFunctionLabel: UILabel!
     @IBOutlet weak var bottomCollectionView: UICollectionView!
     
+    @IBOutlet weak var moreButton: UIButton!
+    
+    
+    @IBAction func pressShowMore(_ sender: Any) {
+        
+        DEBUG_LOG("PRESS")
+        
+       
+        UIView.animate(withDuration: 0.5) { [weak self] in
+            
+            guard let self else {return}
+            
+            self.newFunctionLabel.numberOfLines = .zero
+            self.moreButton.isHidden = true
+            self.view.layoutIfNeeded()
+        }
+        
+        
+        
+        
+    }
+    
     var viewModel:LookupViewModel!
     
     
@@ -111,6 +133,16 @@ extension LookUpViewController {
             
          */
         
+        
+    
+        self.moreButton.backgroundColor = .white
+        self.moreButton.layer.shadowColor = UIColor.white.cgColor
+        self.moreButton.layer.shadowOpacity = 1
+        self.moreButton.layer.shadowOffset = .zero
+        self.moreButton.layer.shadowRadius = 10
+        
+        
+          
     }
     
     func bindCompletion() {
