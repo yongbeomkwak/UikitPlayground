@@ -123,7 +123,7 @@ extension LookUpViewController:UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if collectionView == self.topCollectionView {
-            return 1
+            return viewModel.ratingCase.count
         }
         else {
             return 0
@@ -148,10 +148,45 @@ extension LookUpViewController:UICollectionViewDataSource {
                 cell.update(numberOfRating: model.userRatingCount, rating: model.averageUserRating)
                 return cell
                 
-            default:
-                return UICollectionViewCell()
+            case .age,.chart:
+                let type = viewModel.ratingCase[indexPath.row]
                 
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LookUpTextCell", for: indexPath) as? LookUpTextCell else {
+                    return UICollectionViewCell()
+                }
+                
+                if type == .age {
+                    cell.update(title: "연령", content: "4+", subTitle: "세")
+                }
+                
+                else {
+                    cell.update(title: "차트", content: "#?", subTitle: "음악")
+                }
+                
+          
+                return cell
+                
+            case  .dev:
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LookUpDevCell", for: indexPath) as? LookUpDevCell else {
+                    return UICollectionViewCell()
+                }
+                
+                cell.update(developer: model.artistName)
+                
+                return cell
+                
+                
+            case .lan :
+                
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LookUpNoLineTextCell", for: indexPath) as? LookUpNoLineTextCell else {
+                    return UICollectionViewCell()
+                }
+                
+              
+                cell.update(title: "언어", content: model.languageCodesISO2A.first!, subTitle: "+ 1개 언어" )
+                    return cell
             }
+            
             
             
         }

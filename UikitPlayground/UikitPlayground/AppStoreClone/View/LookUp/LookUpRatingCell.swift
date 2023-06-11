@@ -108,7 +108,6 @@ extension LookUpRatingCell {
         let number = roundedValue / 10 // 정수
         let decimal = roundedValue % 10 // 소수점
         
-        DEBUG_LOG("N: \(number) D: \(decimal) ")
         var result:[Star] = [.empty,.empty,.empty,.empty,.empty]
         
         
