@@ -26,8 +26,11 @@ class LookUpViewController: BaseViewController,ViewControllerFromStoryBoard {
         super.viewDidLoad()
         
         configureUI()
+        
         bindCompletion()
         
+        
+ 
        
        
     }
@@ -78,9 +81,7 @@ extension LookUpViewController {
         self.shareButton.tintColor = .systemBlue
         self.shareButton.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
         
-        
-        self.topCollectionView.dataSource = self
-        self.topCollectionView.delegate = self
+
         
     }
     
@@ -93,6 +94,8 @@ extension LookUpViewController {
             DispatchQueue.main.async {
                 self.titleLabel.text = model.trackName
                 self.developerNameLabel.text = model.artistName
+                self.topCollectionView.dataSource = self
+                self.topCollectionView.delegate = self
             }
             
             
@@ -110,6 +113,7 @@ extension LookUpViewController {
                 
             }
         }
+        
     }
 }
 
