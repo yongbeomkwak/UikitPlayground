@@ -1,25 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17150" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17122"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Rx Clone View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RxCloneViewController" id="Y6W-OH-hqX" customClass="RxCloneViewController" customModule="UikitPlayground" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4fS-Wk-CRU">
+                                <rect key="frame" x="20" y="147" width="353" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textField1:" destination="bk3-mW-f4H" eventType="editingDidEnd" id="GZg-Bi-2lw"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gip-IT-ViO">
+                                <rect key="frame" x="20" y="201" width="353" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5m0-HE-xda">
+                                <rect key="frame" x="0.0" y="275" width="393" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="5m0-HE-xda" firstAttribute="top" secondItem="gip-IT-ViO" secondAttribute="bottom" constant="40" id="12c-tT-sLu"/>
+                            <constraint firstItem="gip-IT-ViO" firstAttribute="top" secondItem="4fS-Wk-CRU" secondAttribute="bottom" constant="20" id="4Dp-3z-7f9"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="4fS-Wk-CRU" secondAttribute="trailing" constant="20" id="Lco-5Z-Ylz"/>
+                            <constraint firstItem="4fS-Wk-CRU" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="88" id="MDr-Zs-gpe"/>
+                            <constraint firstItem="5m0-HE-xda" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="MVl-Jd-A0R"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="5m0-HE-xda" secondAttribute="trailing" id="UTH-Wh-zx0"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="gip-IT-ViO" secondAttribute="trailing" constant="20" id="UTf-3T-2He"/>
+                            <constraint firstItem="gip-IT-ViO" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="guN-bJ-9Md"/>
+                            <constraint firstItem="4fS-Wk-CRU" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="pKr-BW-ihT"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="resultLabel" destination="5m0-HE-xda" id="QxX-uE-ija"/>
+                        <outlet property="textField1" destination="4fS-Wk-CRU" id="PD5-ty-l5m"/>
+                        <outlet property="textField2" destination="gip-IT-ViO" id="LGR-iW-X7E"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="bk3-mW-f4H" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
+            <point key="canvasLocation" x="111" y="4"/>
         </scene>
     </scenes>
     <resources>

@@ -11,12 +11,13 @@ public enum Subject:String {
     case imageCaching
     case escapingClosure
     case appStore
+    case rx
 }
 
 
 class MainViewController: UIViewController,ViewControllerFromStoryBoard {
     
-    let subjects:[Subject] = [.imageCaching,.escapingClosure,.appStore]
+    let subjects:[Subject] = [.imageCaching,.escapingClosure,.appStore,.rx]
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -106,6 +107,9 @@ extension MainViewController:UITableViewDataSource {
             
         case .appStore:
             dest = AppStoreViewController.viewController()
+        
+        case .rx:
+            dest = RxCloneViewController.viewController()
         }
         
        
