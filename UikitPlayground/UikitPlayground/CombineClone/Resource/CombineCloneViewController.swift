@@ -18,15 +18,14 @@ class CombineCloneViewController: UIViewController,ViewControllerFromStoryBoard 
     @IBOutlet weak var resultLabel: UILabel!
     
     private var viewModel : CombineCloneViewModel!
-    private lazy var input = CombineCloneViewModel.Input()
-    private lazy var output = viewModel.transform(from:input)
+    
     
     var subscription = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        bindRx()
+        bindViewModel()
     }
     
     public static func viewController() -> CombineCloneViewController {
@@ -47,10 +46,34 @@ class CombineCloneViewController: UIViewController,ViewControllerFromStoryBoard 
 
 extension CombineCloneViewController {
     
-    private func bindRx(){
+    private func bindViewModel(){
         
+        let input = CombineCloneViewModel.Input(
+            text1: textField1.textPublisher,
+            text2: textField2.textPublisher
+        )
+            
+        
+        let output = self.viewModel.transform(from: input)
+        
+        
+        bindResultLabel(output: output)
 
+    }
+    
+    
+    private func bindResultLabel(output:CombineCloneViewModel.Output){
+        
+        output.isMatch
+            .sink(receiveValue: {[weak self]  in
+                
+                self?.resultLabel.text = String($0)
+                
+            })
+            .store(in: &subscription)
         
     }
+
+    
     
 }
