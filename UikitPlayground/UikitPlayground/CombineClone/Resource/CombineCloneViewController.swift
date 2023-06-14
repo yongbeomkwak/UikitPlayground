@@ -6,8 +6,8 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
+import Combine
+import CombineCocoa
 
 class CombineCloneViewController: UIViewController,ViewControllerFromStoryBoard {
 
@@ -21,7 +21,7 @@ class CombineCloneViewController: UIViewController,ViewControllerFromStoryBoard 
     private lazy var input = CombineCloneViewModel.Input()
     private lazy var output = viewModel.transform(from:input)
     
-    let disposeBag = DisposeBag()
+    var subscription = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()

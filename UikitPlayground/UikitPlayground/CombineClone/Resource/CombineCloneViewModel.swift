@@ -6,23 +6,22 @@
 //
 
 import Foundation
-import RxSwift
+import Combine
 
 
 class CombineCloneViewModel:ViewModelType{
 
+
     
-    let disposeBag = DisposeBag()
+    var subscription = Set<AnyCancellable>()
     
     public struct Input{
-        var text1:PublishSubject<String> = PublishSubject()
-        var text2:PublishSubject<String> = PublishSubject()
+
         
     }
     
     public struct Output{
-        
-        var isMatch:PublishSubject<Bool> = PublishSubject()
+
         
     }
     
@@ -30,11 +29,6 @@ class CombineCloneViewModel:ViewModelType{
         
         let ouput = Output()
         
-        
-        Observable.combineLatest(input.text1, input.text2)
-            .map({$0 == $1})
-            .bind(to: ouput.isMatch)
-            .disposed(by: disposeBag)
        
         
         

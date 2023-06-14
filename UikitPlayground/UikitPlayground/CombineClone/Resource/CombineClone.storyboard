@@ -26,8 +26,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ij9-Y5-tfl">
-                                <rect key="frame" x="0.0" y="255" width="393" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ij9-Y5-tfl">
+                                <rect key="frame" x="20" y="255" width="393" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -36,7 +36,9 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="ij9-Y5-tfl" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="0Ub-t8-9pE"/>
                             <constraint firstItem="CqI-gN-lMW" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="3le-gy-YlG"/>
+                            <constraint firstItem="ij9-Y5-tfl" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" constant="20" id="HVz-82-pA5"/>
                             <constraint firstItem="CqI-gN-lMW" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="88" id="YUt-2o-HS7"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="CqI-gN-lMW" secondAttribute="trailing" constant="20" id="lhg-fQ-DzW"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="w3R-vN-2zr" secondAttribute="trailing" constant="20" id="mbJ-rf-Oy7"/>
