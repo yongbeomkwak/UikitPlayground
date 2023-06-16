@@ -23,22 +23,32 @@ class RxCloneViewModel:ViewModelType{
     public struct Output{
         
         var isMatch:PublishSubject<Bool> = PublishSubject()
+        var image:PublishSubject<Data> = .init()
         
     }
     
     public func transform(from input: Input) -> Output {
         
-        let ouput = Output()
+        let output = Output()
         
         
         Observable.combineLatest(input.text1, input.text2)
             .map({$0 == $1})
-            .bind(to: ouput.isMatch)
+            .bind(to: output.isMatch)
             .disposed(by: disposeBag)
+        
+        
+        let tmpUrl = URL(string: TestUrl.t1.rawValue)!
+        
+        URLSession.shared.rx.data(request: URLRequest(url: tmpUrl))
+            .bind(to: output.image)
+            .disposed(by: disposeBag)
+        
+        
        
         
         
-        return ouput
+        return output
         
     }
     

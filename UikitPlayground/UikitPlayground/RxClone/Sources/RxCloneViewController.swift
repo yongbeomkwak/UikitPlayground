@@ -17,6 +17,10 @@ class RxCloneViewController: UIViewController,ViewControllerFromStoryBoard {
     
     @IBOutlet weak var resultLabel: UILabel!
     
+    @IBOutlet weak var imageView: UIImageView!
+    
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+    
     private var viewModel : RxCloneViewModel!
     private lazy var input = RxCloneViewModel.Input()
     private lazy var output = viewModel.transform(from:input)
@@ -25,7 +29,8 @@ class RxCloneViewController: UIViewController,ViewControllerFromStoryBoard {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        configureUI()
         bindRx()
     }
     
@@ -47,6 +52,12 @@ class RxCloneViewController: UIViewController,ViewControllerFromStoryBoard {
 
 extension RxCloneViewController {
     
+    private func configureUI(){
+        indicator.color = .blue
+        indicator.startAnimating()
+        
+    }
+    
     private func bindRx(){
         
         textField1.rx
@@ -67,6 +78,18 @@ extension RxCloneViewController {
             .bind(to: resultLabel.rx.text)
             .disposed(by: disposeBag)
         
+        output.image
+            .withUnretained(self)
+            .subscribe(onNext: { (owner,data) in
+            
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    owner.indicator.stopAnimating()
+                    owner.indicator.isHidden = true
+                    owner.imageView.image = UIImage(data: data)
+                }
+
+        })
+            .disposed(by: disposeBag)
     }
     
 }

@@ -35,22 +35,38 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Smw-98-TZE">
+                                <rect key="frame" x="146.66666666666666" y="316" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="SQa-sC-iL2"/>
+                                    <constraint firstAttribute="width" constant="100" id="pBs-Mj-Zkf"/>
+                                </constraints>
+                            </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="eLP-3w-S6L">
+                                <rect key="frame" x="186" y="356" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="5m0-HE-xda" firstAttribute="top" secondItem="gip-IT-ViO" secondAttribute="bottom" constant="40" id="12c-tT-sLu"/>
                             <constraint firstItem="gip-IT-ViO" firstAttribute="top" secondItem="4fS-Wk-CRU" secondAttribute="bottom" constant="20" id="4Dp-3z-7f9"/>
+                            <constraint firstItem="eLP-3w-S6L" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="90g-tg-IyB"/>
+                            <constraint firstItem="eLP-3w-S6L" firstAttribute="centerY" secondItem="Smw-98-TZE" secondAttribute="centerY" id="A9b-RS-9HR"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="4fS-Wk-CRU" secondAttribute="trailing" constant="20" id="Lco-5Z-Ylz"/>
                             <constraint firstItem="4fS-Wk-CRU" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="88" id="MDr-Zs-gpe"/>
                             <constraint firstItem="5m0-HE-xda" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="MVl-Jd-A0R"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="5m0-HE-xda" secondAttribute="trailing" id="UTH-Wh-zx0"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="gip-IT-ViO" secondAttribute="trailing" constant="20" id="UTf-3T-2He"/>
+                            <constraint firstItem="Smw-98-TZE" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="YW4-u5-rWd"/>
                             <constraint firstItem="gip-IT-ViO" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="guN-bJ-9Md"/>
+                            <constraint firstItem="Smw-98-TZE" firstAttribute="top" secondItem="5m0-HE-xda" secondAttribute="bottom" constant="20" id="jrs-r9-sAn"/>
                             <constraint firstItem="4fS-Wk-CRU" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="pKr-BW-ihT"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="imageView" destination="Smw-98-TZE" id="z7H-p5-SW9"/>
+                        <outlet property="indicator" destination="eLP-3w-S6L" id="tuL-GX-VfK"/>
                         <outlet property="resultLabel" destination="5m0-HE-xda" id="QxX-uE-ija"/>
                         <outlet property="textField1" destination="4fS-Wk-CRU" id="PD5-ty-l5m"/>
                         <outlet property="textField2" destination="gip-IT-ViO" id="LGR-iW-X7E"/>
