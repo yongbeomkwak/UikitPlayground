@@ -32,22 +32,38 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rCv-wW-BfL">
+                                <rect key="frame" x="146.66666666666666" y="296" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="pXi-K3-ZLi"/>
+                                    <constraint firstAttribute="width" constant="100" id="zeS-5d-9E0"/>
+                                </constraints>
+                            </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Rlq-7K-W12">
+                                <rect key="frame" x="186" y="336" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="NG2-20-drQ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="88" id="3eA-m9-aJN"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="NG2-20-drQ" secondAttribute="trailing" constant="20" id="5CU-lC-Gmi"/>
+                            <constraint firstItem="Rlq-7K-W12" firstAttribute="centerY" secondItem="rCv-wW-BfL" secondAttribute="centerY" id="5kc-99-pIE"/>
                             <constraint firstItem="yYW-XG-qxc" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="F2W-Kd-KnL"/>
                             <constraint firstItem="yYW-XG-qxc" firstAttribute="top" secondItem="Pfs-ky-R2V" secondAttribute="bottom" constant="20" id="PjU-lm-veP"/>
+                            <constraint firstItem="rCv-wW-BfL" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="Qwv-PN-jD7"/>
                             <constraint firstItem="Pfs-ky-R2V" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="VZS-pJ-1pS"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="yYW-XG-qxc" secondAttribute="trailing" constant="20" id="Vgn-0h-UcC"/>
                             <constraint firstItem="NG2-20-drQ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="Vye-uY-jtc"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Pfs-ky-R2V" secondAttribute="trailing" constant="20" id="YVl-Sh-Nce"/>
+                            <constraint firstItem="rCv-wW-BfL" firstAttribute="top" secondItem="yYW-XG-qxc" secondAttribute="bottom" constant="20" id="fMr-gI-230"/>
                             <constraint firstItem="Pfs-ky-R2V" firstAttribute="top" secondItem="NG2-20-drQ" secondAttribute="bottom" constant="20" id="fTw-4a-B3F"/>
+                            <constraint firstItem="Rlq-7K-W12" firstAttribute="centerX" secondItem="rCv-wW-BfL" secondAttribute="centerX" id="xGv-fA-yfz"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="imageView" destination="rCv-wW-BfL" id="xyx-OU-558"/>
+                        <outlet property="indicator" destination="Rlq-7K-W12" id="iiW-DY-ei2"/>
                         <outlet property="resultLabel" destination="Pfs-ky-R2V" id="oVn-Lx-ndK"/>
                         <outlet property="textField1" destination="NG2-20-drQ" id="wIV-Jb-JrL"/>
                         <outlet property="textField2" destination="Pfs-ky-R2V" id="FG1-cI-8zF"/>

@@ -12,15 +12,17 @@ class AsyncAwaitViewController: UIViewController,ViewControllerFromStoryBoard {
     @IBOutlet weak var textField2: UITextField!
     @IBOutlet weak var resultLabel: UITextField!
     
+    @IBOutlet weak var imageView: UIImageView!
     
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        configureUI()
     }
     
 
-    public static func viewController() -> AsyncAwaitViewController {
+    public static func viewController() -> AsyncAwaitViewController { 
         
         let vc = AsyncAwaitViewController.viewController(storyBoardName: "AsyncAwaitClone", bundle: .main)
         
@@ -30,4 +32,12 @@ class AsyncAwaitViewController: UIViewController,ViewControllerFromStoryBoard {
         return vc
     }
 
+}
+
+extension AsyncAwaitViewController {
+    private func configureUI(){
+        indicator.color = .blue
+        indicator.startAnimating()
+        
+    }
 }
