@@ -17,6 +17,12 @@ class CombineCloneViewController: UIViewController,ViewControllerFromStoryBoard 
     
     @IBOutlet weak var resultLabel: UILabel!
     
+    @IBOutlet weak var imageView: UIImageView!
+    
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+    
+    
+    
     private var viewModel : CombineCloneViewModel!
     
     
@@ -25,6 +31,7 @@ class CombineCloneViewController: UIViewController,ViewControllerFromStoryBoard 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureUI()
         bindViewModel()
     }
     
@@ -46,6 +53,12 @@ class CombineCloneViewController: UIViewController,ViewControllerFromStoryBoard 
 
 extension CombineCloneViewController {
     
+    private func configureUI(){
+        indicator.color = .blue
+        indicator.startAnimating()
+        
+    }
+    
     private func bindViewModel(){
         
         let input = CombineCloneViewModel.Input(
@@ -58,6 +71,7 @@ extension CombineCloneViewController {
         
         
         bindResultLabel(output: output)
+        fetchImage(output: output)
 
     }
     
@@ -67,8 +81,30 @@ extension CombineCloneViewController {
         output.isMatch
             .sink(receiveValue: {[weak self]  in
                 
-                self?.resultLabel.text = String($0)
+                guard let self else {return}
                 
+                self.resultLabel.text = String($0)
+                
+            })
+            .store(in: &subscription)
+        
+    }
+    
+    private func fetchImage(output:CombineCloneViewModel.Output){
+        
+        output.dataSource
+            .sink(receiveValue:{[weak self] data in
+                
+                guard let self else {return}
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+                    
+                    self.indicator.stopAnimating()
+                    self.indicator.isHidden = true
+                    
+                    self.imageView.image = UIImage(data: data)
+                }
+            
             })
             .store(in: &subscription)
         

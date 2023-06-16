@@ -26,6 +26,7 @@ class CombineCloneViewModel:ViewModelType{
     
     public struct Output{
         var isMatch:PassthroughSubject<Bool,Never> = .init()
+        var dataSource:PassthroughSubject<Data,Never> = .init()
         
     }
     
@@ -35,6 +36,7 @@ class CombineCloneViewModel:ViewModelType{
         
         
         bindMatch(input: input, output: output)
+        fetchImage(input: input, output: output)
         
         
        
@@ -53,14 +55,39 @@ extension CombineCloneViewModel{
     
     func bindMatch(input: Input, output: Output){
         
-        
         Publishers.CombineLatest(input.text1, input.text2)
             .compactMap({ ($0 ?? "" , $1 ?? "")})
             .filter({!$0.0.isEmpty || !$0.1.isEmpty})
             .map({$0.0 == $0.1})
             .sink(receiveValue: {output.isMatch.send($0)})
             .store(in: &subscription)
+    }
+    
+    func fetchImage(input:Input,output: Output){
         
+        URLSession.shared.dataTaskPublisher(for:URL(string: TestUrl.t2.rawValue)!)
+            .tryMap { (data: Data, response: URLResponse) -> Data in
+                guard let res = response as? HTTPURLResponse, res.statusCode == 200 else {
+                    throw URLError(.badServerResponse)
+                }
+                return data
+            }
+            .sink { completion in
+                
+                switch completion {
+                    
+                case .finished:
+                    DEBUG_LOG("FIN")
+                case .failure(_):
+                    DEBUG_LOG("Failure")
+                }
+                
+            } receiveValue: { data in
+                DEBUG_LOG("OUT")
+                output.dataSource.send(data)
+            }
+            .store(in: &subscription)
+
         
     }
     
