@@ -7,7 +7,7 @@
 
 import UIKit
 import RxSwift
-
+import Combine
 
 class AsyncAwaitViewController: UIViewController,ViewControllerFromStoryBoard {
     @IBOutlet weak var textField1: UITextField!
@@ -23,14 +23,17 @@ class AsyncAwaitViewController: UIViewController,ViewControllerFromStoryBoard {
     private lazy var input = RxAsyncAwaitViewModel.Input()
     private lazy var output = rxViewModel.transform(from:input)
     
-    let disposeBag = DisposeBag()
+    private var combineViewModel : CombineAsyncAwaitViewModel!
     
+    let disposeBag = DisposeBag()
+    var subscription = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureUI()
-        bindRx()
+       // bindRx()
+        bindViewModel()
     }
     
 
@@ -40,6 +43,7 @@ class AsyncAwaitViewController: UIViewController,ViewControllerFromStoryBoard {
         
         vc.rxViewModel = RxAsyncAwaitViewModel()
         
+        vc.combineViewModel = CombineAsyncAwaitViewModel()
         
         
         return vc
@@ -74,6 +78,41 @@ extension AsyncAwaitViewController {
                 
             })
             .disposed(by: disposeBag)
+        
+    }
+    
+    private func bindViewModel(){
+        
+        let input = CombineAsyncAwaitViewModel.Input(
+            text1: textField1.textPublisher,
+            text2: textField2.textPublisher
+        )
+            
+        
+        let output = self.combineViewModel.transform(from: input)
+        
+        fetchImage(output: output)
+
+    }
+    
+    private func fetchImage(output:CombineAsyncAwaitViewModel.Output){
+        
+        output.dataSource
+            .sink(receiveValue:{[weak self] data in
+                
+                guard let self else {return}
+                
+                Task{
+                    await MainActor.run{
+                        self.indicator.stopAnimating()
+                        self.indicator.isHidden = true
+                        
+                        self.imageView.image = UIImage(data: data)
+                    }
+                }
+            
+            })
+            .store(in: &subscription)
         
     }
     
