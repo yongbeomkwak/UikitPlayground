@@ -98,15 +98,18 @@ extension AsyncAwaitViewController {
     private func fetchImage(output:CombineAsyncAwaitViewModel.Output){
         
         output.dataSource
+      //      .receive(on: DispatchQueue.main)
             .sink(receiveValue:{[weak self] data in
                 
                 guard let self else {return}
-                
+//                self.indicator.stopAnimating()
+//                self.indicator.isHidden = true
+//
+//                self.imageView.image = UIImage(data: data)
                 Task{
                     await MainActor.run{
                         self.indicator.stopAnimating()
                         self.indicator.isHidden = true
-                        
                         self.imageView.image = UIImage(data: data)
                     }
                 }
