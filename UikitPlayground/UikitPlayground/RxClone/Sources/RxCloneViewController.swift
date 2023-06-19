@@ -63,8 +63,10 @@ extension RxCloneViewController {
         textField1.rx
             .text
             .orEmpty
+            .debug("WWW")
             .bind(to: input.text1)
             .disposed(by: disposeBag)
+        
         
         textField2.rx
             .text

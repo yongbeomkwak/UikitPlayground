@@ -33,6 +33,7 @@ class RxCloneViewModel:ViewModelType{
         
         
         Observable.combineLatest(input.text1, input.text2)
+            .debug("TTT")
             .map({$0 == $1})
             .bind(to: output.isMatch)
             .disposed(by: disposeBag)

@@ -57,7 +57,9 @@ extension AsyncAwaitViewController {
         indicator.startAnimating()
     }
     
+    
     private func bindRx(){
+        
         
         output
             .dataSource
@@ -106,7 +108,11 @@ extension AsyncAwaitViewController {
 //                self.indicator.isHidden = true
 //
 //                self.imageView.image = UIImage(data: data)
+                
                 Task{
+                    
+                    try await Task.sleep(nanoseconds:3_000_000_000)
+                    
                     await MainActor.run{
                         self.indicator.stopAnimating()
                         self.indicator.isHidden = true
