@@ -34,7 +34,7 @@ class GitViewModel:ViewModelType {
         input.text
             .withLatestFrom(output.dataSource){($0,$1)}
             .map { (text, dataSource) in
-                return text.isEmpty ? dataSource : dataSource.filter({ $0.name.contains(text)})
+                return text.isEmpty ? dataSource : dataSource.filter({ $0.name.lowercased().contains(text)})
             }
             .bind(to: output.filteredDataSource)
             .disposed(by: disposeBag)
