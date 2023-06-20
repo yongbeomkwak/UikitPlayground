@@ -6,19 +6,26 @@
 //
 
 import UIKit
+import RxSwift
 
 class GitViewController: BaseViewController,ViewControllerFromStoryBoard {
 
     @IBOutlet weak var talbeView: UITableView!
     let searchController = UISearchController(searchResultsController: nil)
     
+    let disposeBag = DisposeBag()
+    
+    var viewModel:GitViewModel!
+    lazy var input = GitViewModel.Input()
+    lazy var output = viewModel.transform(from: input)
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setNavigationItem()
-  
         configureUI()
+        bindRx()
         
     }
     
@@ -27,6 +34,7 @@ class GitViewController: BaseViewController,ViewControllerFromStoryBoard {
         
         let vc = GitViewController.viewController(storyBoardName: "GitClone", bundle: .main)
         
+        vc.viewModel = GitViewModel()
         
         
         return vc
@@ -62,6 +70,15 @@ extension GitViewController {
         
     }
     
+    private func bindRx(){
+        
+        output.dataSource.subscribe(onNext: {
+            DEBUG_LOG($0)
+        })
+        .disposed(by:disposeBag)
+        
+    }
+    
 }
 
 extension GitViewController:UITableViewDataSource{
@@ -93,7 +110,8 @@ extension GitViewController: UISearchResultsUpdating {
         
         guard let text = searchController.searchBar.text else {return}
         
-
+        input.text
+            .onNext(text)
 
     }
 }

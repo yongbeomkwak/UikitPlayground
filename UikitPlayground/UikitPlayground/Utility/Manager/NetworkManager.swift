@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 
 // 참고 자료: https://gyuios.tistory.com/108
@@ -58,6 +59,12 @@ class NetworkManager {
         }
     }
     
+    func getCommonHeaders() -> HTTPHeaders {
+           let headers: HTTPHeaders = [
+               "Content-Type":"application/json",
+           ]
+           return headers
+       }
     
     
 }
