@@ -83,9 +83,10 @@ extension EscapingViewController {
          runClosure() 함수가 값을 반환하고 종료됨
          이렇게 클로저가 함수가 종료되기 전에 실행되기 때문에 closure는 Non-Escaping 클로저 입니다.
          */
-        DEBUG_LOG("2️⃣ Run nonEscape")
-        closure()
-        DEBUG_LOG("3️⃣ Exit nonEscape")
+            DEBUG_LOG("2️⃣ Run nonEscape")
+            closure()
+            DEBUG_LOG("3️⃣ Exit nonEscape")
+        
     }
     
 

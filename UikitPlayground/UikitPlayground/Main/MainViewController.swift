@@ -14,12 +14,13 @@ public enum Subject:String {
     case rx
     case combine
     case async
+    case rxWithGit
 }
 
 
 class MainViewController: UIViewController,ViewControllerFromStoryBoard {
     
-    let subjects:[Subject] = [.imageCaching,.escapingClosure,.appStore,.rx,.combine,.async]
+    let subjects:[Subject] = [.imageCaching,.escapingClosure,.appStore,.rx,.combine,.async,.rxWithGit]
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -118,8 +119,12 @@ extension MainViewController:UITableViewDataSource {
         
         case .async:
             dest = AsyncAwaitViewController.viewController()
+            
+        case .rxWithGit:
+            dest = GitViewController.viewController()
         }
         
+       
        
         
         self.navigationController?.pushViewController(dest!, animated: true)
