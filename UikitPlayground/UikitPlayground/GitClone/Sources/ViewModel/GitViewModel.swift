@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 import Alamofire
 
 class GitViewModel:ViewModelType {
@@ -21,8 +22,8 @@ class GitViewModel:ViewModelType {
     
     struct Output{
         
-        let dataSource:PublishSubject<[RepoModel]> = .init()
-        let filteredDataSource:PublishSubject<[RepoModel]> = .init()
+        let dataSource:BehaviorRelay<[RepoModel]> = BehaviorRelay(value: [])
+        let filteredDataSource:BehaviorRelay<[RepoModel]> = BehaviorRelay(value: [])
     }
     
     
@@ -31,17 +32,22 @@ class GitViewModel:ViewModelType {
         let output = Output()
         
         input.text
-            .subscribe(onNext: {
-                DEBUG_LOG($0)
-            })
+            .withLatestFrom(output.dataSource){($0,$1)}
+            .map { (text, dataSource) in
+                return text.isEmpty ? dataSource : dataSource.filter({ $0.name.contains(text)})
+            }
+            .bind(to: output.filteredDataSource)
             .disposed(by: disposeBag)
         
         
         getRepos()
             .asObservable()
-            .debug("HH")
-            .bind(to: output.dataSource)
+            .bind(to: output.dataSource,output.filteredDataSource)
             .disposed(by: disposeBag)
+        
+        
+        
+        
         
         
         return output
@@ -54,9 +60,6 @@ extension GitViewModel {
     
     func getRepos() -> Single<[RepoModel]>{
         
-        
-        DEBUG_LOG("HEELL")
-        
        return Single.create{ single in
             
             AF.request("https://api.github.com/users/yongbeomkwak/starred",
@@ -66,7 +69,6 @@ extension GitViewModel {
                                  "Authorization":"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"])
             .validate(statusCode: 200..<300)
             .responseDecodable(of:[RepoModel].self){ data in
-                DEBUG_LOG("HELLO")
                 switch data.result {
                     
                 case .success(let response):

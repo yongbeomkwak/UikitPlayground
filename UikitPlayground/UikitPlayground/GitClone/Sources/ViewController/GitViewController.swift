@@ -64,45 +64,40 @@ extension GitViewController {
     
     private func configureUI(){
         
-        self.talbeView.dataSource = self
-        self.talbeView.delegate = self
-        
         
     }
     
     private func bindRx(){
         
-        output.dataSource.subscribe(onNext: {
-            DEBUG_LOG($0)
-        })
-        .disposed(by:disposeBag)
+        
+        talbeView.rx.setDelegate(self)
+        
+        
+        output.filteredDataSource
+            .bind(to: talbeView.rx.items){ (tableView: UITableView, index: Int, model: RepoModel) -> GitRepoTableViewCell in
+                
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "GitRepoTableViewCell",for:IndexPath(row: index, section: 0)) as? GitRepoTableViewCell else {
+                    return GitRepoTableViewCell()
+                }
+                
+                //
+                cell.update(model:model)
+                
+                return cell
+                
+            }
+            .disposed(by: disposeBag)
         
     }
     
 }
 
-extension GitViewController:UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 0 
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "GitRepoTableViewCell") as? GitRepoTableViewCell else {
-            return UITableViewCell()
-        }
-        
-        //
-        
-        return cell
-    }
-    
-    
-}
+
 
 extension GitViewController:UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
+    }
 }
 
 extension GitViewController: UISearchResultsUpdating {
