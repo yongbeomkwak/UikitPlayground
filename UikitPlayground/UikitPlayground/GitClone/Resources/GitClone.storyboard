@@ -27,7 +27,7 @@
                                 <rect key="frame" x="0.0" y="115" width="393" height="703"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="109" id="YM0-IB-DR5">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GitRepoTableViewCell" rowHeight="109" id="YM0-IB-DR5" customClass="GitRepoTableViewCell" customModule="UikitPlayground" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="109"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YM0-IB-DR5" id="8De-8r-n8c">
@@ -64,6 +64,11 @@
                                                 <constraint firstItem="fJe-Tu-bh2" firstAttribute="top" secondItem="8De-8r-n8c" secondAttribute="topMargin" constant="20" id="uhM-qS-nWp"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="numStarLabel" destination="Fq0-ZZ-H10" id="4jz-lV-89x"/>
+                                            <outlet property="repoTitleLabel" destination="fJe-Tu-bh2" id="SEr-He-vfS"/>
+                                            <outlet property="starImageView" destination="6PX-8P-8I7" id="cMw-3k-4x1"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
