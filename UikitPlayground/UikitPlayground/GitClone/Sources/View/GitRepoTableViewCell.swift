@@ -36,5 +36,11 @@ class GitRepoTableViewCell: UITableViewCell {
 extension GitRepoTableViewCell {
     
     
+    func update(model:RepoModel){
+        
+        
+        self.repoTitleLabel.text = model.name
+        self.numStarLabel.text = "\(model.starCount)"
+    }
     
 }

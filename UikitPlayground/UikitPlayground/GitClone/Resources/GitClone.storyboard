@@ -16,15 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="F5M-Oz-FWt">
-                                <rect key="frame" x="0.0" y="59" width="393" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="oNu-lz-kC8"/>
-                                </connections>
-                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6Yd-qZ-iUR">
-                                <rect key="frame" x="0.0" y="115" width="393" height="703"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GitRepoTableViewCell" rowHeight="109" id="YM0-IB-DR5" customClass="GitRepoTableViewCell" customModule="UikitPlayground" customModuleProvider="target">
@@ -76,21 +69,36 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="F5M-Oz-FWt" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Ypw-HM-s2y"/>
-                            <constraint firstItem="F5M-Oz-FWt" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="Ytk-Ny-h4k"/>
+                            <constraint firstItem="6Yd-qZ-iUR" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="iG4-fB-lH8"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="6Yd-qZ-iUR" secondAttribute="bottom" id="llt-6I-9B6"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="6Yd-qZ-iUR" secondAttribute="trailing" id="tQc-MH-nlk"/>
-                            <constraint firstItem="F5M-Oz-FWt" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="tsn-E2-lOo"/>
-                            <constraint firstItem="6Yd-qZ-iUR" firstAttribute="top" secondItem="F5M-Oz-FWt" secondAttribute="bottom" id="v3p-iz-tWc"/>
                             <constraint firstItem="6Yd-qZ-iUR" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="zQa-0y-uGv"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Q9p-fe-NdV"/>
                     <connections>
-                        <outlet property="searchBar" destination="F5M-Oz-FWt" id="fSt-wi-yXP"/>
                         <outlet property="talbeView" destination="6Yd-qZ-iUR" id="0Ka-RF-3xK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1045.0381679389313" y="-2.1126760563380285"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="NPV-WJ-iyi">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GCl-X1-whH" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="e0g-0K-w7h">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="DhR-ad-fsY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HpO-0H-eeY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="118.32061068702289" y="-2.1126760563380285"/>
         </scene>
