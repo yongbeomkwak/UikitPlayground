@@ -66,6 +66,7 @@ extension CombineCloneViewController {
             text2: textField2.textPublisher
         )
             
+ 
         
         let output = self.viewModel.transform(from: input)
         
@@ -74,7 +75,7 @@ extension CombineCloneViewController {
         fetchImage(output: output)
 
     }
-    
+
     
     private func bindResultLabel(output:CombineCloneViewModel.Output){
         

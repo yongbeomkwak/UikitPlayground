@@ -16,11 +16,6 @@ class GitRepoTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
         self.starImageView.image = UIImage(systemName: "star.fill")
         self.starImageView.tintColor = .yellow
         
@@ -28,8 +23,15 @@ class GitRepoTableViewCell: UITableViewCell {
         
         self.numStarLabel.font = .systemFont(ofSize: 10, weight: .regular)
         self.numStarLabel.tintColor = .systemGray4
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
         
     }
+    
+
 
 }
 

@@ -54,7 +54,7 @@ class CombineCloneViewModel:ViewModelType{
 extension CombineCloneViewModel{
     
     func bindMatch(input: Input, output: Output){
-        
+
         Publishers.CombineLatest(input.text1, input.text2)
             .compactMap({ ($0 ?? "" , $1 ?? "")})
             .filter({!$0.0.isEmpty || !$0.1.isEmpty})
